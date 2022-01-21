@@ -17,16 +17,16 @@ public class Team {
     @Id
     @GeneratedValue(strategy= GenerationType.SEQUENCE, generator="team_sequence")
     @SequenceGenerator(name="team_sequence", allocationSize=10)
-    private Long id;
+    private Long ID;
 
     @Column(name="name")
     private String name;
 
-    @Column(name="user")
+    @Column(name="users")
     @OneToMany(mappedBy="team")
     private List<User> users;
 
-    @Column(name="mentor")
+    @Column(name="mentors")
     @OneToMany(mappedBy="team")
     private List<Mentor> mentors;
 

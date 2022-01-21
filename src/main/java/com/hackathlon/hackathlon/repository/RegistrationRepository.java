@@ -6,7 +6,7 @@ import org.springframework.data.jpa.repository.*;
 import java.util.*;
 
 public interface RegistrationRepository extends JpaRepository<Registration, Long> {
-    Registration findByCommentId(Long commentId);
-    Registration findByUserId(Long userId);
-    List<Registration> findAllByEventId(Long eventId);
+    Registration findByCommentsID(Long commentId);
+    Registration findByUserID(Long userId);
+    List<Registration> findAllByEventID(Long eventId);
 }

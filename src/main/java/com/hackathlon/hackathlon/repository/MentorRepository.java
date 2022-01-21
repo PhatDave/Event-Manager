@@ -6,5 +6,5 @@ import org.springframework.data.jpa.repository.*;
 import java.util.*;
 
 public interface MentorRepository extends JpaRepository<Mentor, Long> {
-    List<Mentor> findAllByTeamId(Long teamId);
+    List<Mentor> findAllByTeamID(Long teamId);
 }

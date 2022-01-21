@@ -1,13 +1,8 @@
 package com.hackathlon.hackathlon.entity;
 
-import lombok.Getter;
-import lombok.RequiredArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.util.Date;
 import java.util.List;
 
@@ -17,6 +12,12 @@ import java.util.List;
 @Entity
 @Table(name="event")
 public class Event {
+    @Id
+    @GeneratedValue(strategy= GenerationType.SEQUENCE, generator="event_sequence")
+    @SequenceGenerator(name="event_sequence", allocationSize=10)
+    @Setter(AccessLevel.PRIVATE)
+    private Long ID;
+
     @Column(name="name", unique=true)
     private String name;
 
