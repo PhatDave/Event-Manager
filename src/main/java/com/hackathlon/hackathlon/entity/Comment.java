@@ -21,4 +21,8 @@ public class Comment {
 
     @Column(name="score")
     private Integer score;
+
+    @JoinColumn(name="registrationId")
+    @ManyToOne
+    private Registration registration;
 }
