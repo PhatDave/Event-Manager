@@ -10,16 +10,16 @@ import java.util.*;
 
 @Service
 @RequiredArgsConstructor
-public class CommentServiceImpl implements CommentService {
-    private final CommentRepository commentRepository;
+public class EventServiceImpl implements EventService {
+    private final EventRepository eventRepository;
 
     @Override
-    public List<Comment> getAll() {
-        return this.commentRepository.findAll();
+    public List<Event> getAll() {
+        return this.eventRepository.findAll();
     }
 
     @Override
-    public Optional<Comment> getById(Long id) {
-        return this.commentRepository.findById(id);
+    public Optional<Event> getById(Long id) {
+        return this.eventRepository.findById(id);
     }
 }

@@ -10,16 +10,16 @@ import java.util.*;
 
 @Service
 @RequiredArgsConstructor
-public class CommentServiceImpl implements CommentService {
-    private final CommentRepository commentRepository;
+public class RegistrationServiceImpl implements RegistrationService {
+    private final RegistrationRepository registrationRepository;
 
     @Override
-    public List<Comment> getAll() {
-        return this.commentRepository.findAll();
+    public List<Registration> getAll() {
+        return this.registrationRepository.findAll();
     }
 
     @Override
-    public Optional<Comment> getById(Long id) {
-        return this.commentRepository.findById(id);
+    public Optional<Registration> getById(Long id) {
+        return this.registrationRepository.findById(id);
     }
 }

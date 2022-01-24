@@ -10,16 +10,16 @@ import java.util.*;
 
 @Service
 @RequiredArgsConstructor
-public class CommentServiceImpl implements CommentService {
-    private final CommentRepository commentRepository;
+public class MentorServiceImpl implements MentorService {
+    private final MentorRepository mentorRepository;
 
     @Override
-    public List<Comment> getAll() {
-        return this.commentRepository.findAll();
+    public List<Mentor> getAll() {
+        return this.mentorRepository.findAll();
     }
 
     @Override
-    public Optional<Comment> getById(Long id) {
-        return this.commentRepository.findById(id);
+    public Optional<Mentor> getById(Long id) {
+        return this.mentorRepository.findById(id);
     }
 }
