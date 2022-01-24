@@ -6,5 +6,5 @@ import java.util.*;
 
 public interface ExperienceService {
     List<Experience> getAll();
-    Experience getById(Long id);
+    Optional<Experience> getById(Long id);
 }

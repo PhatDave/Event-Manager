@@ -6,5 +6,5 @@ import java.util.*;
 
 public interface EducationService {
     List<Education> getAll();
-    Education getById(Long id);
+    Optional<Education> getById(Long id);
 }

@@ -6,5 +6,5 @@ import java.util.*;
 
 public interface MentorService {
     List<Mentor> getAll();
-    Mentor getById(Long id);
+    Optional<Mentor> getById(Long id);
 }
