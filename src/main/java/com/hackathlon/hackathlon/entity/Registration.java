@@ -35,7 +35,7 @@ public class Registration {
     @OneToMany(mappedBy="registration")
     private List<Comment> comments;
 
-    @JoinColumn(name="user")
+    @JoinColumn(name="users")
     @OneToOne
     private User user;
 

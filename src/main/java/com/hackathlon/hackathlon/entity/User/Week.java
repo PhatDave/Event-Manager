@@ -4,6 +4,7 @@ import com.hackathlon.hackathlon.entity.enums.*;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.*;
 
 @Getter
 @Setter
@@ -26,7 +27,7 @@ public class Week {
     @Column(name="weekNumber")
     private Integer weekNumber;
 
-    @ManyToOne
     @JoinColumn(name="user")
-    private User user;
+    @ManyToMany
+    private List<User> user;
 }

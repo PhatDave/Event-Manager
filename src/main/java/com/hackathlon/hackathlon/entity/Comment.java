@@ -22,7 +22,7 @@ public class Comment {
     @Column(name="score")
     private Integer score;
 
-    @JoinColumn(name="registrationId")
+    @JoinColumn(name="registrationID")
     @ManyToOne
     private Registration registration;
 }

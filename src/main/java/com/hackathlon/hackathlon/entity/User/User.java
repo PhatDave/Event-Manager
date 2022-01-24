@@ -27,11 +27,11 @@ public class User {
     @Embedded
     Fluff fluff;
 
-    @Column(name="education")
+    @Column(name="educations")
     @OneToMany(mappedBy="user")
     private List<Education> educations;
 
-    @Column(name="experience")
+    @Column(name="experiences")
     @OneToMany(mappedBy="user")
     private List<Experience> experiences;
 
@@ -43,7 +43,7 @@ public class User {
     @OneToOne
     private Registration registration;
 
-    @Column(name="week")
-    @OneToMany(mappedBy="user")
+    @Column(name="weeks")
+    @ManyToMany(mappedBy="user")
     private List<Week> weeks;
 }
