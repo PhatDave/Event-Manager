@@ -7,6 +7,7 @@ import org.springframework.http.*;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
+@RequestMapping("/event")
 @RequiredArgsConstructor
 public class EventController {
     private final EventService eventService;
@@ -14,6 +15,6 @@ public class EventController {
     @PostMapping
     private ResponseEntity<EventResponseDto> create(@RequestBody EventRequestDto eventRequestDto) {
         System.out.println(eventRequestDto);
-//        return ResponseEntity.ok(eventService.create(eventRequestDto));
+        return null;
     }
 }

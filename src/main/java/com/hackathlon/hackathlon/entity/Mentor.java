@@ -1,5 +1,6 @@
 package com.hackathlon.hackathlon.entity;
 
+import com.fasterxml.jackson.annotation.*;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;

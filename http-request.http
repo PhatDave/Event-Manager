@@ -1,0 +1,85 @@
+POST localhost:8080/event/
+Content-Type: application/json
+
+{
+  "name": "Spring Boot Summer School 2019",
+  "maxParticipants": 36,
+  "teams": [
+    {
+      "name": "Amber"
+    },
+    {
+      "name": "Loom"
+    },
+    {
+      "name": "Metropolis"
+    },
+    {
+      "name": "Panama"
+    },
+    {
+      "name": "Skara"
+    },
+    {
+      "name": "Valhalla"
+    }
+  ],
+  "registrationsNotBefore": "2019-07-01T00:00:00+01:00",
+  "registrationsNotAfter": "2019-07-31T23:59:59+01:00",
+  "confirmationNotAfter": "2019-08-10T23:59:59+01:00",
+  "startDate": "2019-08-15",
+  "weeks": "5"
+}
+
+> {%
+client.test("Request executed successfully", function() {
+  client.assert(response.status === 200);
+});
+%}
+
+###
+
+POST localhost:8080/event/
+Content-Type: application/json
+
+{
+  "name": "Spring Boot Summer School 2019",
+  "maxParticipants": 36,
+  "teams": [
+    {
+      "name": "Amber"
+    },
+    {
+      "name": "Loom"
+    },
+    {
+      "name": "Metropolis"
+    },
+    {
+      "name": "Panama"
+    },
+    {
+      "name": "Skara"
+    },
+    {
+      "name": "Valhalla",
+      "mentors": [
+        "nikola.masic@ag04.com",
+        "mia.matic@ag04.com"
+      ]
+    }
+  ],
+  "registrationsNotBefore": "2019-07-01T00:00:00+01:00",
+  "registrationsNotAfter": "2019-07-31T23:59:59+01:00",
+  "confirmationNotAfter": "2019-08-10T23:59:59+01:00",
+  "startDate": "2019-08-15",
+  "weeks": "5"
+}
+
+> {%
+client.test("Request executed successfully", function() {
+  client.assert(response.status === 200);
+});
+%}
+
+###
