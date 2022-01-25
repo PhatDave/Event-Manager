@@ -1,7 +1,5 @@
 package com.hackathlon.hackathlon.service.impl;
 
-import com.hackathlon.hackathlon.dto.*;
-import com.hackathlon.hackathlon.entity.*;
 import com.hackathlon.hackathlon.entity.User.*;
 import com.hackathlon.hackathlon.repository.*;
 import com.hackathlon.hackathlon.service.*;

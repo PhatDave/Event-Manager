@@ -1,6 +1,5 @@
-package com.hackathlon.hackathlon.dto;
+package com.hackathlon.hackathlon.dto.requests;
 
-import com.hackathlon.hackathlon.entity.*;
 import lombok.*;
 
 import java.util.*;
@@ -12,7 +11,7 @@ import java.util.*;
 public class EventRequestDto {
     private String name;
     private Integer maxParticipants;
-    private List<Team> teams;
+    private List<TeamRequestDto> teams;
     private Date registrationsNotBefore;
     private Date registrationsNotAfter;
     private Date confirmationNotAfter;

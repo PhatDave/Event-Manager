@@ -1,8 +1,7 @@
 package com.hackathlon.hackathlon.service;
 
-import com.hackathlon.hackathlon.dto.*;
+import com.hackathlon.hackathlon.dto.requests.*;
 import com.hackathlon.hackathlon.entity.*;
-import com.hackathlon.hackathlon.entity.User.*;
 
 import java.util.*;
 

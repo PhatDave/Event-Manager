@@ -5,6 +5,7 @@ import com.hackathlon.hackathlon.entity.*;
 import org.mapstruct.*;
 
 @Mapper(builder=@Builder(disableBuilder=true))
-public interface EventMapper {
+public interface TeamMapper {
     Event toEntity(EventRequestDto dto);
+
 }

@@ -1,6 +1,6 @@
 package com.hackathlon.hackathlon.service.impl;
 
-import com.hackathlon.hackathlon.dto.*;
+import com.hackathlon.hackathlon.dto.requests.*;
 import com.hackathlon.hackathlon.entity.*;
 import com.hackathlon.hackathlon.mapper.*;
 import com.hackathlon.hackathlon.repository.*;
