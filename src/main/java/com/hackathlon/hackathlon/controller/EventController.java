@@ -1,6 +1,5 @@
 package com.hackathlon.hackathlon.controller;
 
-import com.hackathlon.hackathlon.dto.*;
 import com.hackathlon.hackathlon.dto.requests.*;
 import com.hackathlon.hackathlon.service.*;
 import lombok.*;
@@ -14,8 +13,8 @@ public class EventController {
     private final EventService eventService;
 
     @PostMapping
-    private ResponseEntity<EventResponseDto> create(@RequestBody EventRequestDto eventRequestDto) {
+    private ResponseEntity<String> create(@RequestBody EventRequestDto eventRequestDto) {
         System.out.println(eventRequestDto);
-        return null;
+        return ResponseEntity.ok(HttpStatus.CREATED.toString());
     }
 }

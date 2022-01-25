@@ -10,5 +10,5 @@ import java.util.*;
 @NoArgsConstructor
 public class TeamRequestDto {
     private String name;
-    private List<MentorRequestDto> mentor;
+    private List<MentorRequestDto> mentors;
 }
