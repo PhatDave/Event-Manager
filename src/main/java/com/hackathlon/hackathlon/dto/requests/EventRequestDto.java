@@ -9,6 +9,7 @@ import java.util.*;
 @AllArgsConstructor
 @NoArgsConstructor
 public class EventRequestDto {
+//    @JsonProperty("id")
     private String name;
     private Integer maxParticipants;
     private List<TeamRequestDto> teams;

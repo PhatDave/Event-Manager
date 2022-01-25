@@ -31,8 +31,7 @@ public class Registration {
     @Column(name="kickoff")
     private Boolean kickoff;
 
-    @Column(name="comments")
-    @OneToMany(mappedBy="registration")
+    @OneToMany(mappedBy="registration", cascade=CascadeType.ALL)
     private List<Comment> comments;
 
     @JoinColumn(name="users")

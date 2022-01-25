@@ -1,6 +1,8 @@
 package com.hackathlon.hackathlon.dto.requests;
 
+import com.hackathlon.hackathlon.entity.*;
 import lombok.*;
+import org.mapstruct.*;
 
 import java.util.*;
 
@@ -9,6 +11,7 @@ import java.util.*;
 @AllArgsConstructor
 @NoArgsConstructor
 public class TeamRequestDto {
+    private Event event;
     private String name;
     private List<MentorRequestDto> mentors;
 }

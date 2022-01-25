@@ -21,14 +21,17 @@ public class Event {
     @Column(name="name", unique=true)
     private String name;
 
-    @Column(name="registerNotBefore")
-    private Date registerNotBefore;
+//    @Column(name="registerNotBefore")
+//    private Date registerNotBefore;
 
-    @Column(name="registerNotAfter")
-    private Date registerNotAfter;
+    @Column(name="registrationsNotBefore")
+    private Date registrationsNotBefore;
 
-    @Column(name="confirmNotAfter")
-    private Date confirmNotAfter;
+    @Column(name="registrationsNotAfter")
+    private Date registrationsNotAfter;
+
+    @Column(name="confirmationNotAfter")
+    private Date confirmationNotAfter;
 
     @Column(name="startDate")
     private Date startDate;
@@ -39,11 +42,9 @@ public class Event {
     @Column(name="weeks")
     private Integer weeks;
 
-    @Column(name="teams")
-    @OneToMany(mappedBy="event")
+    @OneToMany(mappedBy="event", cascade=CascadeType.ALL)
     private List<Team> teams;
 
-    @Column(name="registrations")
-    @OneToMany(mappedBy="event")
+    @OneToMany(mappedBy="event", cascade=CascadeType.ALL)
     private List<Registration> registrations;
 }

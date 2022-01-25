@@ -22,12 +22,12 @@ public class Team {
     @Column(name="name")
     private String name;
 
-    @Column(name="users")
-    @OneToMany(mappedBy="team")
+//    @ReferencedClumn(name="ID")
+
+    @OneToMany(mappedBy="team", cascade=CascadeType.ALL)
     private List<User> users;
 
-    @Column(name="mentors")
-    @OneToMany(mappedBy="team")
+    @OneToMany(mappedBy="team", cascade=CascadeType.ALL)
     private List<Mentor> mentors;
 
     @ManyToOne

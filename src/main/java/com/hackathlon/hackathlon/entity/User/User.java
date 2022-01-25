@@ -27,12 +27,10 @@ public class User {
     @Embedded
     Fluff fluff;
 
-    @Column(name="educations")
-    @OneToMany(mappedBy="user")
+    @OneToMany(mappedBy="user", cascade=CascadeType.ALL)
     private List<Education> educations;
 
-    @Column(name="experiences")
-    @OneToMany(mappedBy="user")
+    @OneToMany(mappedBy="user", cascade=CascadeType.ALL)
     private List<Experience> experiences;
 
     @JoinColumn(name="teamID")
@@ -46,4 +44,9 @@ public class User {
     @Column(name="weeks")
     @ManyToMany(mappedBy="user")
     private List<Week> weeks;
+
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private Team user;
+
 }
