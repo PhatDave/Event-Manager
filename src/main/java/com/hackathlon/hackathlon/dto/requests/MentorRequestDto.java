@@ -8,6 +8,5 @@ import lombok.*;
 @AllArgsConstructor
 @NoArgsConstructor
 public class MentorRequestDto {
-    private Team team;
     private String email;
 }

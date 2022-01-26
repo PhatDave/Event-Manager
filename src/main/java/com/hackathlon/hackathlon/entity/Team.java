@@ -22,8 +22,6 @@ public class Team {
     @Column(name="name")
     private String name;
 
-//    @ReferencedClumn(name="ID")
-
     @OneToMany(mappedBy="team", cascade=CascadeType.ALL)
     private List<User> users;
 

@@ -27,8 +27,4 @@ public class Mentor {
     @JoinColumn(name="teamID")
     private Team team;
 
-    @ManyToOne
-    @JoinColumn(name = "mentor_id")
-    private Team mentor;
-
 }

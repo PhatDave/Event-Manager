@@ -11,7 +11,6 @@ import java.util.*;
 @AllArgsConstructor
 @NoArgsConstructor
 public class TeamRequestDto {
-    private Event event;
     private String name;
     private List<MentorRequestDto> mentors;
 }

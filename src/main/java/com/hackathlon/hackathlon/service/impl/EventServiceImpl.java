@@ -6,6 +6,7 @@ import com.hackathlon.hackathlon.mapper.*;
 import com.hackathlon.hackathlon.repository.*;
 import com.hackathlon.hackathlon.service.*;
 import lombok.*;
+import org.apache.commons.collections4.CollectionUtils;
 import org.springframework.stereotype.*;
 
 import java.util.*;
@@ -29,6 +30,13 @@ public class EventServiceImpl implements EventService {
     @Override
     public Event create(EventRequestDto dto) {
         Event event = eventMapper.toEntity(dto);
+        event.getTeams().forEach(team -> team.setEvent(event));
+        List<Team> teams = event.getTeams();
+        for(Team team : teams){
+            if(CollectionUtils.isNotEmpty(team.getMentors())){
+                team.getMentors().forEach(mentor -> mentor.setTeam(team));
+            }
+        }
         Event savedEvent = eventRepository.save(event);
         return savedEvent;
     }
