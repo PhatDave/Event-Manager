@@ -19,9 +19,10 @@ public class Registration {
     @Setter(AccessLevel.PRIVATE)
     private Long ID;
 
-    //    UUID uuid = UUID.randomUUID();
-    @Column(name="UUID")
-    private UUID uuid;
+//    UUID uuid = UUID.randomUUID();
+//    java: variable UUID is already defined in class com.hackathlon.hackathlon.entity.Registration_
+//    @Column(name="UUID")
+//    private UUID uuid;
 
     @Column(name="score")
     private Integer score;

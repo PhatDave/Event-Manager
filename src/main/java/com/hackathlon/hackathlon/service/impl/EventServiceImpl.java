@@ -1,8 +1,8 @@
 package com.hackathlon.hackathlon.service.impl;
 
-import com.hackathlon.hackathlon.dto.requests.*;
+import com.hackathlon.hackathlon.dto.requests.eventDtos.*;
 import com.hackathlon.hackathlon.entity.*;
-import com.hackathlon.hackathlon.mapper.*;
+import com.hackathlon.hackathlon.mapper.eventMappers.*;
 import com.hackathlon.hackathlon.repository.*;
 import com.hackathlon.hackathlon.service.*;
 import lombok.*;

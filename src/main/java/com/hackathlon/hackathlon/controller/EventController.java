@@ -1,6 +1,6 @@
 package com.hackathlon.hackathlon.controller;
 
-import com.hackathlon.hackathlon.dto.requests.*;
+import com.hackathlon.hackathlon.dto.requests.eventDtos.*;
 import com.hackathlon.hackathlon.entity.*;
 import com.hackathlon.hackathlon.service.*;
 import lombok.*;
