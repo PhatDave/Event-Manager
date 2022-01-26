@@ -1,4 +1,4 @@
-package com.hackathlon.hackathlon.dto.requests;
+package com.hackathlon.hackathlon.dto.requests.registrationDtos;
 
 public class NameRequestDto {
     private String first;
