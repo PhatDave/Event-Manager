@@ -19,7 +19,6 @@ public class EventController {
     @PostMapping
     private ResponseEntity<?> create(@RequestBody EventRequestDto eventRequestDto) {
         try {
-            System.out.println(eventRequestDto);
             Event event = eventService.create(eventRequestDto);
             return ResponseEntity.created(URI.create("/event/" + event.getID())).body("");
         }

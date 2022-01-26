@@ -19,6 +19,10 @@ public class Registration {
     @Setter(AccessLevel.PRIVATE)
     private Long ID;
 
+    //    UUID uuid = UUID.randomUUID();
+    @Column(name="UUID")
+    private UUID uuid;
+
     @Column(name="score")
     private Integer score;
 

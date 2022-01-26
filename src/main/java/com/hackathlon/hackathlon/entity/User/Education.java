@@ -1,6 +1,5 @@
 package com.hackathlon.hackathlon.entity.User;
 
-
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
