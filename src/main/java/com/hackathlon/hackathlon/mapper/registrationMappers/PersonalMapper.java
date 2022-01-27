@@ -24,8 +24,8 @@ public interface PersonalMapper {
     @Mapping(source = "fluff.summary", target = "summary")
     PersonalRequestDto toDto(User user);
 
-//    @AfterMapping
-//    default void mapId(@MappingTarget User user) {
-//        user.getEducation().setUser(user);
-//    }
+    @AfterMapping
+    default void mapUserIdInExperience(@MappingTarget User user) {
+        user.getEducation().setUser(user);
+    }
 }

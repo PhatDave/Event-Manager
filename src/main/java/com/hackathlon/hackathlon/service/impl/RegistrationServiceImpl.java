@@ -29,7 +29,6 @@ public class RegistrationServiceImpl implements RegistrationService {
 
     @Override
     public Registration create(Long eventID, RegistrationRequestDto dto) {
-        // TODO set event, map dto, save entity
         Registration reg = registrationMapper.toEntity(dto);
         reg.setEvent(eventRepository.getById(eventID));
         reg.setUUID(UUID.randomUUID().toString());

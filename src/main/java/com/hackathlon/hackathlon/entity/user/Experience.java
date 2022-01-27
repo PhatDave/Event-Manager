@@ -35,7 +35,4 @@ public class Experience {
 
     @OneToMany(mappedBy = "experience", cascade = CascadeType.ALL)
     private List<Skill> skills;
-
-//    TODO: skills missing
-    // TODO where is the skills, repositoryUrl and summary
 }
