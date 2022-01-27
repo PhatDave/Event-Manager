@@ -1,4 +1,4 @@
-package com.hackathlon.hackathlon.entity.User;
+package com.hackathlon.hackathlon.entity.user;
 
 import com.hackathlon.hackathlon.entity.*;
 import lombok.AccessLevel;
@@ -27,25 +27,25 @@ public class User {
     @Embedded
     Fluff fluff;
 
-    @OneToMany(mappedBy="user", cascade=CascadeType.ALL)
-    private List<Education> educations;
+    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
+    private Education education;
 
-    @OneToMany(mappedBy="user", cascade=CascadeType.ALL)
-    private List<Experience> experiences;
+    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
+    private Experience experience;
 
     @JoinColumn(name="teamID")
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     private Team team;
 
     @JoinColumn(name="registration")
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     private Registration registration;
 
     @Column(name="weeks")
-    @ManyToMany(mappedBy="user")
+    @ManyToMany(mappedBy="user", cascade=CascadeType.ALL)
     private List<Week> weeks;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "user_id")
     private Team user;
 

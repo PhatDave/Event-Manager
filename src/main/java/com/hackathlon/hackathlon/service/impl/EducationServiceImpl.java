@@ -1,6 +1,6 @@
 package com.hackathlon.hackathlon.service.impl;
 
-import com.hackathlon.hackathlon.entity.User.*;
+import com.hackathlon.hackathlon.entity.user.*;
 import com.hackathlon.hackathlon.repository.*;
 import com.hackathlon.hackathlon.service.*;
 import lombok.*;

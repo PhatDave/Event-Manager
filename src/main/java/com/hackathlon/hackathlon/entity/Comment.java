@@ -23,6 +23,6 @@ public class Comment {
     private Integer score;
 
     @JoinColumn(name="registrationID")
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     private Registration registration;
 }

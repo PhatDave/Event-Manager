@@ -23,7 +23,7 @@ public class Mentor {
     @Column(name="email")
     private String email;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name="teamID")
     private Team team;
 

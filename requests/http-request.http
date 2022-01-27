@@ -36,3 +36,38 @@ Content-Type: application/json
 }
 
 ###
+
+POST localhost:8080/event/312/registrations
+Content-Type: application/json
+
+{
+  "personal": {
+    "name": {
+      "first": "Ivan",
+      "last": "Horvat"
+    },
+    "email": "ivan.horvat@ag04.com",
+    "phone": "+385 99 292 8111",
+    "education": {
+      "faculty": "TVZ",
+      "year": 3
+    },
+    "summary": "Interested in Games and Boardgames, a geek at heart :)"
+  },
+  "experience": {
+    "years": 2,
+    "skills": [
+      "API",
+      "Spring",
+      "Spring Boot",
+      "Java",
+      "Hibernate",
+      "JPA"
+    ],
+    "repositoryUrl": "https://bibucket.org/ihorvat",
+    "summary": "I worked on technologies such as Spring Boot, Hibernate and JPA."
+  },
+  "motivation": "I want to expand my knowledge on Spring Boot.",
+  "preferredOS": "macOS"
+  }
+}

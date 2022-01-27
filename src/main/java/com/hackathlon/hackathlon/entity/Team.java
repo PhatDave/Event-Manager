@@ -1,6 +1,6 @@
 package com.hackathlon.hackathlon.entity;
 
-import com.hackathlon.hackathlon.entity.User.User;
+import com.hackathlon.hackathlon.entity.user.User;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
@@ -28,7 +28,7 @@ public class Team {
     @OneToMany(mappedBy="team", cascade=CascadeType.ALL)
     private List<Mentor> mentors;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name="eventID")
     private Event event;
 }

@@ -1,7 +1,7 @@
 package com.hackathlon.hackathlon.entity;
 
 
-import com.hackathlon.hackathlon.entity.User.*;
+import com.hackathlon.hackathlon.entity.user.*;
 import lombok.*;
 
 import javax.persistence.*;
@@ -19,26 +19,31 @@ public class Registration {
     @Setter(AccessLevel.PRIVATE)
     private Long ID;
 
-    @Column(name="score")
+//    UUID uuid = UUID.randomUUID();
+//    java: variable UUID is already defined in class com.hackathlon.hackathlon.entity.Registration_
+//    @Column(name="UUID")
+//    private UUID uuid;
+
+    @Column(name = "score")
     private Integer score;
 
-    @Column(name="UUID")
+    @Column(name = "UUID")
     private String UUID;
 
-    @Column(name="participation")
+    @Column(name = "participation")
     private Boolean participation;
 
-    @Column(name="kickoff")
+    @Column(name = "kickoff")
     private Boolean kickoff;
 
-    @OneToMany(mappedBy="registration", cascade=CascadeType.ALL)
+    @OneToMany(mappedBy = "registration", cascade = CascadeType.ALL)
     private List<Comment> comments;
 
-    @JoinColumn(name="users")
-    @OneToOne
+    @JoinColumn(name = "users")
+    @OneToOne(cascade = CascadeType.ALL)
     private User user;
 
-    @JoinColumn(name="eventID")
-    @ManyToOne
+    @JoinColumn(name = "eventID")
+    @ManyToOne(cascade = CascadeType.ALL)
     private Event event;
 }

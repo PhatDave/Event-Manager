@@ -1,7 +1,6 @@
 package com.hackathlon.hackathlon.service;
 
-import com.hackathlon.hackathlon.entity.*;
-import com.hackathlon.hackathlon.entity.User.*;
+import com.hackathlon.hackathlon.entity.user.*;
 
 import java.util.*;
 

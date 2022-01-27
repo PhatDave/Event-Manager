@@ -1,6 +1,6 @@
-package com.hackathlon.hackathlon.mapper;
+package com.hackathlon.hackathlon.mapper.eventMappers;
 
-import com.hackathlon.hackathlon.dto.requests.*;
+import com.hackathlon.hackathlon.dto.requests.eventDtos.*;
 import com.hackathlon.hackathlon.entity.*;
 import org.mapstruct.*;
 
