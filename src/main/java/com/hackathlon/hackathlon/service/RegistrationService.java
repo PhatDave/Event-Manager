@@ -14,4 +14,6 @@ public interface RegistrationService {
 
     void delete(Registration registration);
     Registration create(Long eventID, RegistrationRequestDto registrationRequestDto);
+
+    void calculateScore(Registration registration);
 }
