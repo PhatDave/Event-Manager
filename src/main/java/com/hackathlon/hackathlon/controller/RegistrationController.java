@@ -16,6 +16,7 @@ import java.util.*;
 public class RegistrationController {
     private final RegistrationService registrationService;
     private final EventService eventService;
+    private final CommentService commentService;
 
     @PostMapping
     private ResponseEntity<?> create(@PathVariable Long eventID, @RequestBody RegistrationRequestDto registrationRequestDto) {
@@ -41,5 +42,24 @@ public class RegistrationController {
         }
         this.registrationService.delete(registration.get());
         return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    @PutMapping("/{registrationUUID}/score")
+    private ResponseEntity<?> manuallyScore(@PathVariable Long eventID, @PathVariable String registrationUUID, @RequestBody CommentRequestDto commentRequestDto) {
+        var event = eventService.getById(eventID);
+        var registrationOpt = registrationService.getByUUID(registrationUUID);
+        try {
+            if (registrationOpt.isEmpty()) throw new NoSuchElementException();
+            if (event.isEmpty()) throw new NoSuchElementException();
+            
+            Registration registration = registrationOpt.get();
+            commentService.create(registration.getID(), commentRequestDto);
+        } catch (NumberFormatException e) {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        } catch (NoSuchElementException e) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 }
