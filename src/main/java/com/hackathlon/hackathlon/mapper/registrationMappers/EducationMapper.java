@@ -1,7 +1,7 @@
 package com.hackathlon.hackathlon.mapper.registrationMappers;
 
 import com.hackathlon.hackathlon.dto.requests.registrationDtos.EducationRequestDto;
-import com.hackathlon.hackathlon.entity.User.Education;
+import com.hackathlon.hackathlon.entity.user.Education;
 import org.mapstruct.Builder;
 import org.mapstruct.Mapper;
 

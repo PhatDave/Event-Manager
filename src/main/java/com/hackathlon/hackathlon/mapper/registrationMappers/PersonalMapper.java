@@ -1,7 +1,7 @@
 package com.hackathlon.hackathlon.mapper.registrationMappers;
 
 import com.hackathlon.hackathlon.dto.requests.registrationDtos.PersonalRequestDto;
-import com.hackathlon.hackathlon.entity.User.User;
+import com.hackathlon.hackathlon.entity.user.User;
 import org.mapstruct.*;
 
 @Mapper(
@@ -24,8 +24,8 @@ public interface PersonalMapper {
     @Mapping(source = "fluff.summary", target = "summary")
     PersonalRequestDto toDto(User user);
 
-    @AfterMapping
-    default void mapId(@MappingTarget User user) {
-        user.getEducations().forEach(education -> education.setUser(user));
-    }
+//    @AfterMapping
+//    default void mapId(@MappingTarget User user) {
+//        user.getEducation().setUser(user);
+//    }
 }

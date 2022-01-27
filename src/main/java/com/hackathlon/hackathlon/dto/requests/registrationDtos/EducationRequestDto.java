@@ -11,5 +11,5 @@ import lombok.Setter;
 @NoArgsConstructor
 public class EducationRequestDto {
     private String faculty;
-    private Integer years;
+    private Integer year;
 }

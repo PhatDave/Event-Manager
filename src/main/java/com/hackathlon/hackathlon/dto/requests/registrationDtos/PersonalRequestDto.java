@@ -15,6 +15,6 @@ public class PersonalRequestDto {
     private NameRequestDto name;
     private String email;
     private String phone;
-    private List<EducationRequestDto> educations;
+    private EducationRequestDto education;
     private String summary;
 }
