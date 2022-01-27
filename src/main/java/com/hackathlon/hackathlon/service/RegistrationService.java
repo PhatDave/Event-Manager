@@ -10,6 +10,8 @@ public interface RegistrationService {
     List<Registration> getAll();
 
     Optional<Registration> getById(Long id);
+    Optional<Registration> getByUUID(String UUID);
 
+    void delete(Registration registration);
     Registration create(Long eventID, RegistrationRequestDto registrationRequestDto);
 }

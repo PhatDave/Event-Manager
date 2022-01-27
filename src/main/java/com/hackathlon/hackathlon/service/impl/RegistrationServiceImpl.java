@@ -28,6 +28,16 @@ public class RegistrationServiceImpl implements RegistrationService {
     }
 
     @Override
+    public Optional<Registration> getByUUID(String UUID) {
+        return this.registrationRepository.findByUUID(UUID);
+    }
+
+    @Override
+    public void delete(Registration registration) {
+        this.registrationRepository.delete(registration);
+    }
+
+    @Override
     public Registration create(Long eventID, RegistrationRequestDto dto) {
         Registration reg = registrationMapper.toEntity(dto);
         reg.setEvent(eventRepository.getById(eventID));
