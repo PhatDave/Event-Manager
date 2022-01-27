@@ -1,4 +1,4 @@
-package com.hackathlon.hackathlon.entity.User;
+package com.hackathlon.hackathlon.entity.user;
 
 import com.hackathlon.hackathlon.entity.enums.*;
 import lombok.*;

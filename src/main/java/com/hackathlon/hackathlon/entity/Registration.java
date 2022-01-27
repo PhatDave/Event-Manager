@@ -1,7 +1,7 @@
 package com.hackathlon.hackathlon.entity;
 
 
-import com.hackathlon.hackathlon.entity.User.*;
+import com.hackathlon.hackathlon.entity.user.*;
 import lombok.*;
 
 import javax.persistence.*;

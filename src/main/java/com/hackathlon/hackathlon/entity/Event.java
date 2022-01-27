@@ -21,9 +21,6 @@ public class Event {
     @Column(name="name", unique=true)
     private String name;
 
-//    @Column(name="registerNotBefore")
-//    private Date registerNotBefore;
-
     @Column(name="registrationsNotBefore")
     private Date registrationsNotBefore;
 

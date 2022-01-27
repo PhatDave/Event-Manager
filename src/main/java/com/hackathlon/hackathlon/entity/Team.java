@@ -1,6 +1,6 @@
 package com.hackathlon.hackathlon.entity;
 
-import com.hackathlon.hackathlon.entity.User.User;
+import com.hackathlon.hackathlon.entity.user.User;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;

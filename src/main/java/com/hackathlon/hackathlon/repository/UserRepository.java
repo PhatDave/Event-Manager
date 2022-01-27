@@ -1,6 +1,6 @@
 package com.hackathlon.hackathlon.repository;
 
-import com.hackathlon.hackathlon.entity.User.*;
+import com.hackathlon.hackathlon.entity.user.*;
 import org.springframework.data.jpa.repository.*;
 
 import java.util.*;
