@@ -1,12 +1,14 @@
 package com.hackathlon.hackathlon.service.impl;
 
-import com.hackathlon.hackathlon.entity.*;
-import com.hackathlon.hackathlon.repository.*;
-import com.hackathlon.hackathlon.service.*;
-import lombok.*;
-import org.springframework.stereotype.*;
+import com.hackathlon.hackathlon.dto.requests.registrationDtos.RegistrationRequestDto;
+import com.hackathlon.hackathlon.entity.Registration;
+import com.hackathlon.hackathlon.repository.RegistrationRepository;
+import com.hackathlon.hackathlon.service.RegistrationService;
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Service;
 
-import java.util.*;
+import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -21,5 +23,11 @@ public class RegistrationServiceImpl implements RegistrationService {
     @Override
     public Optional<Registration> getById(Long id) {
         return this.registrationRepository.findById(id);
+    }
+
+    @Override
+    public Registration create(Long eventID, RegistrationRequestDto registrationRequestDto) {
+        // TODO set event, map dto, save entity
+        return null;
     }
 }

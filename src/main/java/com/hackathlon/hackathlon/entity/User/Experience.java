@@ -19,13 +19,15 @@ public class Experience {
     @Setter(AccessLevel.PRIVATE)
     private Long ID;
 
-    @Column(name="name")
+    @Column(name = "name")
     private String name;
 
-    @Column(name="years")
+    @Column(name = "years")
     private Integer years;
 
     @ManyToOne
-    @JoinColumn(name="userID")
+    @JoinColumn(name = "userID")
     private User user;
+
+    // TODO where is the skills, repositoryUrl and summary
 }
