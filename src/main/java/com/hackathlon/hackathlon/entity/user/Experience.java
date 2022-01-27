@@ -6,6 +6,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.*;
 
 @Getter
 @Setter
@@ -19,15 +20,22 @@ public class Experience {
     @Setter(AccessLevel.PRIVATE)
     private Long ID;
 
-    @Column(name = "name")
-    private String name;
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "userID")
+    private User user;
 
     @Column(name = "years")
     private Integer years;
 
-    @ManyToOne
-    @JoinColumn(name = "userID")
-    private User user;
+    @Column(name = "repositoryUrl")
+    private String repositoryUrl;
 
+    @Column(name = "summary")
+    private String summary;
+
+    @OneToMany(mappedBy = "experience", cascade = CascadeType.ALL)
+    private List<Skill> skills;
+
+//    TODO: skills missing
     // TODO where is the skills, repositoryUrl and summary
 }

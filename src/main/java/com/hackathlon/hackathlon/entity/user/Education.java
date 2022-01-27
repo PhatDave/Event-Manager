@@ -25,7 +25,7 @@ public class Education {
     @Column(name="years")
     private Integer years;
 
-    @ManyToOne
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name="userID")
     private User user;
 }

@@ -28,7 +28,7 @@ public class Team {
     @OneToMany(mappedBy="team", cascade=CascadeType.ALL)
     private List<Mentor> mentors;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name="eventID")
     private Event event;
 }
