@@ -1,6 +1,7 @@
 package com.hackathlon.hackathlon.mapper.registrationMappers;
 
 import com.hackathlon.hackathlon.dto.requests.registrationDtos.PersonalRequestDto;
+import com.hackathlon.hackathlon.dto.responses.registrationDtos.*;
 import com.hackathlon.hackathlon.entity.user.User;
 import org.mapstruct.*;
 
@@ -22,7 +23,7 @@ public interface PersonalMapper {
     @Mapping(source = "basicInfo.email", target = "email")
     @Mapping(source = "basicInfo.phone", target = "phone")
     @Mapping(source = "fluff.summary", target = "summary")
-    PersonalRequestDto toDto(User user);
+    PersonalResponseDto toDto(User user);
 
     @AfterMapping
     default void mapUserIdInExperience(@MappingTarget User user) {

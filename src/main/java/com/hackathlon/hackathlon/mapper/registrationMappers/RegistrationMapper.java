@@ -1,6 +1,7 @@
 package com.hackathlon.hackathlon.mapper.registrationMappers;
 
 import com.hackathlon.hackathlon.dto.requests.registrationDtos.*;
+import com.hackathlon.hackathlon.dto.responses.registrationDtos.*;
 import com.hackathlon.hackathlon.entity.*;
 import org.mapstruct.*;
 import org.springframework.beans.factory.annotation.*;
@@ -8,6 +9,8 @@ import org.springframework.beans.factory.annotation.*;
 @Mapper(
         uses = {
                 PersonalMapper.class,
+                ExperienceMapper.class,
+                CommentMapper.class,
         },
         builder = @Builder(disableBuilder = true))
 public abstract class RegistrationMapper {
@@ -16,6 +19,10 @@ public abstract class RegistrationMapper {
 
     @Mapping(source = "personal", target = "user")
     public abstract Registration toEntity(RegistrationRequestDto dto);
+
+    @Mapping(source = "user", target = "personal")
+    @Mapping(source = "user.experience", target = "experience")
+    public abstract RegistrationResponseDto toDto(Registration registration);
 
     @AfterMapping
     public void mapAdditionalFields(RegistrationRequestDto dto, @MappingTarget Registration registration) {

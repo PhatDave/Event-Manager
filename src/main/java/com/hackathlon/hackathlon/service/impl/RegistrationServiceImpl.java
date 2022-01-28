@@ -1,6 +1,7 @@
 package com.hackathlon.hackathlon.service.impl;
 
 import com.hackathlon.hackathlon.dto.requests.registrationDtos.RegistrationRequestDto;
+import com.hackathlon.hackathlon.dto.responses.registrationDtos.*;
 import com.hackathlon.hackathlon.entity.Registration;
 import com.hackathlon.hackathlon.entity.user.*;
 import com.hackathlon.hackathlon.mapper.registrationMappers.*;
@@ -21,6 +22,14 @@ public class RegistrationServiceImpl implements RegistrationService {
     @Override
     public List<Registration> getAll() {
         return this.registrationRepository.findAll();
+    }
+
+    @Override
+    public RegistrationResponseDto getDtoByUUID(String UUID) {
+        Optional<Registration> regOpt = registrationRepository.findByUUID(UUID);
+        Registration regObj = regOpt.get();
+        RegistrationResponseDto dto = registrationMapper.toDto(regObj);
+        return dto;
     }
 
     @Override
@@ -52,6 +61,7 @@ public class RegistrationServiceImpl implements RegistrationService {
     public void calculateScore(Registration registration) {
         Integer score = 0;
 
+//      TODO: Do enum instead of arraylist
         ArrayList goodSkills = new ArrayList<String>();
         goodSkills.add("Java");
         goodSkills.add("Spring");

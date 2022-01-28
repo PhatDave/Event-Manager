@@ -1,6 +1,7 @@
 package com.hackathlon.hackathlon.controller;
 
 import com.hackathlon.hackathlon.dto.requests.registrationDtos.*;
+import com.hackathlon.hackathlon.dto.responses.registrationDtos.*;
 import com.hackathlon.hackathlon.entity.*;
 import com.hackathlon.hackathlon.service.*;
 import lombok.*;
@@ -44,6 +45,13 @@ public class RegistrationController {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
+    @GetMapping("/{registrationUUID}")
+    private ResponseEntity<RegistrationResponseDto> get(@PathVariable Long eventID, @PathVariable String registrationUUID) {
+        var dto = registrationService.getDtoByUUID(registrationUUID);
+
+        return ResponseEntity.ok(dto);
+    }
+
     @PutMapping("/{registrationUUID}/score")
     private ResponseEntity<?> manuallyScore(@PathVariable Long eventID, @PathVariable String registrationUUID, @RequestBody CommentRequestDto commentRequestDto) {
         var event = eventService.getById(eventID);
@@ -51,7 +59,7 @@ public class RegistrationController {
         try {
             if (registrationOpt.isEmpty()) throw new NoSuchElementException();
             if (event.isEmpty()) throw new NoSuchElementException();
-            
+
             Registration registration = registrationOpt.get();
             commentService.create(registration.getID(), commentRequestDto);
         } catch (NumberFormatException e) {
