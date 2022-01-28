@@ -51,6 +51,12 @@ public class RegistrationController {
         return ResponseEntity.ok(dto);
     }
 
+    @GetMapping("?page={pageNumber}&size={pageSize}")
+    private ResponseEntity<MultipleRegistrationResponseDto> getRegistrationsByPage(@PathVariable Long eventID, @PathVariable String registrationUUID, @PathVariable Integer pageNumber, @PathVariable Integer pageSize) {
+        MultipleRegistrationResponseDto dto = registrationService.getRegistrationsByEventIDPaginated(eventID, pageNumber, pageSize);
+        return ResponseEntity.ok(dto);
+    }
+
     @PutMapping("/{registrationUUID}/score")
     private ResponseEntity<?> manuallyScoreRegistrationByUUID(@PathVariable Long eventID, @PathVariable String registrationUUID, @RequestBody CommentRequestDto commentRequestDto) {
         var event = eventService.getById(eventID);

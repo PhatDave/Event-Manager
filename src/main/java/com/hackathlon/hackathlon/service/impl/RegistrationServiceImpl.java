@@ -12,12 +12,14 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
+import java.util.stream.*;
 
 @Service
 @RequiredArgsConstructor
 public class RegistrationServiceImpl implements RegistrationService {
     private final RegistrationRepository registrationRepository;
     private final RegistrationMapper registrationMapper;
+    private final MultipleRegistrationMapper multipleRegistrationMapper;
     private final EventRepository eventRepository;
 
     @Override
@@ -56,6 +58,18 @@ public class RegistrationServiceImpl implements RegistrationService {
         this.calculateScore(reg);
         Registration savedReg = registrationRepository.save(reg);
         return savedReg;
+    }
+
+    @Override
+    public MultipleRegistrationResponseDto getRegistrationsByEventIDPaginated(Long eventID, Integer pageNumber, Integer pageSize) {
+        List<Registration> registrations = registrationRepository.findAllByEventIDOrderByScoreDesc(eventID);
+        Integer pageStart = pageNumber * pageSize;
+        Integer pageEnd = (pageNumber + 1) * pageSize;
+//        TODO: error handling
+        List<Registration> pageRegistrations = registrations.subList(pageStart, pageEnd);
+        List<RegistrationResponseDto> pageRegistrationDtos = pageRegistrations.stream().map(registrationMapper::toDto).collect(Collectors.toList());
+        MultipleRegistrationResponseDto dto = multipleRegistrationMapper.toDto(pageRegistrationDtos);
+        return dto;
     }
 
     @Override

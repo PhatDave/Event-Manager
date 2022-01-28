@@ -16,5 +16,7 @@ public interface RegistrationService {
     void delete(Registration registration);
     Registration create(Long eventID, RegistrationRequestDto registrationRequestDto);
 
+    MultipleRegistrationResponseDto getRegistrationsByEventIDPaginated(Long eventID, Integer pageNumber, Integer pageSize);
+
     void calculateScore(Registration registration);
 }
