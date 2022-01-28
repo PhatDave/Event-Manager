@@ -9,7 +9,7 @@ import java.util.Optional;
 
 public interface RegistrationService {
     List<Registration> getAll();
-    RegistrationResponseDto getDtoByUUID(String UUID);
+    RegistrationResponseDto getRegistrationDtoByUUID(String UUID);
     Optional<Registration> getById(Long id);
     Optional<Registration> getByUUID(String UUID);
 
