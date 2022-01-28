@@ -37,7 +37,7 @@ Content-Type: application/json
 
 ###
 
-POST localhost:8080/event/312/registrations
+POST localhost:8080/event/402/registrations
 Content-Type: application/json
 
 {
@@ -74,4 +74,6 @@ Content-Type: application/json
 
 ###
 
+GET localhost:8080/event/402/registrations/af2a6e9b-19cb-4317-8e9c-d046f83a4c75
+Content-Type: application/json
 
