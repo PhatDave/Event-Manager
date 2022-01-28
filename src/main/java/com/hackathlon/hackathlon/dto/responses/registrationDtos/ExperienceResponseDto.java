@@ -10,7 +10,7 @@ import java.util.*;
 @NoArgsConstructor
 public class ExperienceResponseDto {
     private Integer years;
-    private List<SkillResponseDto> skills;
+    private List<String> skills;
     private String repositoryUrl;
     private String summary;
 }

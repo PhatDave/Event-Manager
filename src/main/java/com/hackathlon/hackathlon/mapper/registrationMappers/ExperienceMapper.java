@@ -5,6 +5,9 @@ import com.hackathlon.hackathlon.dto.responses.registrationDtos.*;
 import com.hackathlon.hackathlon.entity.user.*;
 import org.mapstruct.*;
 
+import java.util.*;
+import java.util.stream.*;
+
 @Mapper(
         uses = {
                 SkillMapper.class,
