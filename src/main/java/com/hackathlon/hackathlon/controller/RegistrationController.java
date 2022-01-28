@@ -1,6 +1,7 @@
 package com.hackathlon.hackathlon.controller;
 
 import com.hackathlon.hackathlon.dto.requests.registrationDtos.*;
+import com.hackathlon.hackathlon.dto.responses.registrationDtos.*;
 import com.hackathlon.hackathlon.entity.*;
 import com.hackathlon.hackathlon.service.*;
 import lombok.*;
@@ -19,7 +20,7 @@ public class RegistrationController {
     private final CommentService commentService;
 
     @PostMapping
-    private ResponseEntity<?> create(@PathVariable Long eventID, @RequestBody RegistrationRequestDto registrationRequestDto) {
+    private ResponseEntity<?> createRegistration(@PathVariable Long eventID, @RequestBody RegistrationRequestDto registrationRequestDto) {
         Optional<Event> event = eventService.getById(eventID);
         if (event.isEmpty()) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
@@ -34,7 +35,7 @@ public class RegistrationController {
     }
 
     @DeleteMapping("/{registrationUUID}")
-    private ResponseEntity<?> delete(@PathVariable Long eventID, @PathVariable String registrationUUID) {
+    private ResponseEntity<?> deleteRegistrationByUUID(@PathVariable Long eventID, @PathVariable String registrationUUID) {
         var event = eventService.getById(eventID);
         var registration = registrationService.getByUUID(registrationUUID);
         if (event.isEmpty() || registration.isEmpty()) {
@@ -44,14 +45,20 @@ public class RegistrationController {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
+    @GetMapping("/{registrationUUID}")
+    private ResponseEntity<RegistrationResponseDto> getRegistrationByUUID(@PathVariable Long eventID, @PathVariable String registrationUUID) {
+        var dto = registrationService.getRegistrationDtoByUUID(registrationUUID);
+        return ResponseEntity.ok(dto);
+    }
+
     @PutMapping("/{registrationUUID}/score")
-    private ResponseEntity<?> manuallyScore(@PathVariable Long eventID, @PathVariable String registrationUUID, @RequestBody CommentRequestDto commentRequestDto) {
+    private ResponseEntity<?> manuallyScoreRegistrationByUUID(@PathVariable Long eventID, @PathVariable String registrationUUID, @RequestBody CommentRequestDto commentRequestDto) {
         var event = eventService.getById(eventID);
         var registrationOpt = registrationService.getByUUID(registrationUUID);
         try {
             if (registrationOpt.isEmpty()) throw new NoSuchElementException();
             if (event.isEmpty()) throw new NoSuchElementException();
-            
+
             Registration registration = registrationOpt.get();
             commentService.create(registration.getID(), commentRequestDto);
         } catch (NumberFormatException e) {

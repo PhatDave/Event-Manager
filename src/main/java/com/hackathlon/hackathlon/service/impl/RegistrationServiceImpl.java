@@ -1,8 +1,10 @@
 package com.hackathlon.hackathlon.service.impl;
 
 import com.hackathlon.hackathlon.dto.requests.registrationDtos.RegistrationRequestDto;
+import com.hackathlon.hackathlon.dto.responses.registrationDtos.*;
 import com.hackathlon.hackathlon.entity.Registration;
 import com.hackathlon.hackathlon.entity.user.*;
+import com.hackathlon.hackathlon.enums.*;
 import com.hackathlon.hackathlon.mapper.registrationMappers.*;
 import com.hackathlon.hackathlon.repository.*;
 import com.hackathlon.hackathlon.service.RegistrationService;
@@ -21,6 +23,14 @@ public class RegistrationServiceImpl implements RegistrationService {
     @Override
     public List<Registration> getAll() {
         return this.registrationRepository.findAll();
+    }
+
+    @Override
+    public RegistrationResponseDto getRegistrationDtoByUUID(String UUID) {
+        Optional<Registration> regOpt = registrationRepository.findByUUID(UUID);
+        Registration regObj = regOpt.get();
+        RegistrationResponseDto dto = registrationMapper.toDto(regObj);
+        return dto;
     }
 
     @Override
@@ -52,15 +62,6 @@ public class RegistrationServiceImpl implements RegistrationService {
     public void calculateScore(Registration registration) {
         Integer score = 0;
 
-        ArrayList goodSkills = new ArrayList<String>();
-        goodSkills.add("Java");
-        goodSkills.add("Spring");
-        goodSkills.add("Spring Boot");
-        ArrayList okaySkills = new ArrayList<String>();
-        okaySkills.add("Hibernate");
-        okaySkills.add("JPA");
-        okaySkills.add("Scala");
-
         User user = registration.getUser();
         Education education = user.getEducation();
         Experience experience = user.getExperience();
@@ -77,13 +78,7 @@ public class RegistrationServiceImpl implements RegistrationService {
         }
 
         for (Skill skill : skills) {
-            if (goodSkills.contains(skill.getName())) {
-                score += 20;
-            } else if (okaySkills.contains(skill.getName())) {
-                score += 10;
-            } else {
-                score += 5;
-            }
+            score += SkillsEnum.applyScore(skill.getName());
         }
 
         registration.setScore(score);

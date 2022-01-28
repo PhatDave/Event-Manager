@@ -22,4 +22,9 @@ public class Skill {
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "experienceID")
     private Experience experience;
+
+    @Override
+    public String toString() {
+        return this.name;
+    }
 }

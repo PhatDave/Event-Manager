@@ -6,7 +6,6 @@ import com.hackathlon.hackathlon.mapper.registrationMappers.*;
 import com.hackathlon.hackathlon.repository.*;
 import com.hackathlon.hackathlon.service.*;
 import lombok.*;
-import org.springframework.data.crossstore.*;
 import org.springframework.stereotype.*;
 
 import java.util.*;
