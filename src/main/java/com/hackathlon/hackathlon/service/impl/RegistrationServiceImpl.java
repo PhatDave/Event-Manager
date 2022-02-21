@@ -21,7 +21,6 @@ import java.util.stream.*;
 public class RegistrationServiceImpl implements RegistrationService {
     private final RegistrationRepository registrationRepository;
     private final RegistrationMapper registrationMapper;
-    private final MultipleRegistrationMapper multipleRegistrationMapper;
     private final EventRepository eventRepository;
 
     @Override
