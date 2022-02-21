@@ -15,7 +15,7 @@ import javax.persistence.*;
 @Table(name="mentors")
 public class Mentor {
     @Id
-    @GeneratedValue(strategy= GenerationType.SEQUENCE, generator="mentor_sequence")
+    @GeneratedValue(strategy=GenerationType.SEQUENCE, generator="mentor_sequence")
     @SequenceGenerator(name="mentor_sequence", allocationSize=10)
     @Setter(AccessLevel.PRIVATE)
     private Long ID;
@@ -23,7 +23,7 @@ public class Mentor {
     @Column(name="email")
     private String email;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade=CascadeType.ALL)
     @JoinColumn(name="teamID")
     private Team team;
 

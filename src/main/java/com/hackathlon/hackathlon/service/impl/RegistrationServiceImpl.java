@@ -9,8 +9,10 @@ import com.hackathlon.hackathlon.mapper.registrationMappers.*;
 import com.hackathlon.hackathlon.repository.*;
 import com.hackathlon.hackathlon.service.RegistrationService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.*;
 import org.springframework.stereotype.Service;
 
+import java.sql.*;
 import java.util.*;
 import java.util.stream.*;
 
@@ -61,18 +63,6 @@ public class RegistrationServiceImpl implements RegistrationService {
     }
 
     @Override
-    public MultipleRegistrationResponseDto getRegistrationsByEventIDPaginated(Long eventID, Integer pageNumber, Integer pageSize) {
-        List<Registration> registrations = registrationRepository.findAllByEventIDOrderByScoreDesc(eventID);
-        Integer pageStart = pageNumber * pageSize;
-        Integer pageEnd = (pageNumber + 1) * pageSize;
-//        TODO: error handling
-        List<Registration> pageRegistrations = registrations.subList(pageStart, pageEnd);
-        List<RegistrationResponseDto> pageRegistrationDtos = pageRegistrations.stream().map(registrationMapper::toDto).collect(Collectors.toList());
-        MultipleRegistrationResponseDto dto = multipleRegistrationMapper.toDto(pageRegistrationDtos);
-        return dto;
-    }
-
-    @Override
     public void calculateScore(Registration registration) {
         Integer score = 0;
 
@@ -96,5 +86,11 @@ public class RegistrationServiceImpl implements RegistrationService {
         }
 
         registration.setScore(score);
+    }
+
+    @Override
+    public Page<RegistrationResponseDto> getAllbyEventId(Long eventID, Pageable pageable) {
+        Page<Registration> registrationpage = registrationRepository.findAllByEventID(eventID, pageable);
+        return registrationpage.map(registrationMapper::toDto);
     }
 }
