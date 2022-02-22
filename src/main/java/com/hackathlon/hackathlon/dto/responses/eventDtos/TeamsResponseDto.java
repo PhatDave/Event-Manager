@@ -9,6 +9,5 @@ import java.util.*;
 @AllArgsConstructor
 @NoArgsConstructor
 public class TeamsResponseDto {
-//    TODO: map through constructor
     List<TeamResponseDto> teams;
 }
