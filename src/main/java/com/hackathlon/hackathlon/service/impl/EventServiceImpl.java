@@ -20,6 +20,7 @@ import java.util.stream.*;
 public class EventServiceImpl implements EventService {
     private final EventRepository eventRepository;
     private final RegistrationRepository registrationRepository;
+    private final UserRepository userRepository;
 
     private final EventMapper eventMapper;
     private final ParticipantMapper participantMapper;
@@ -60,7 +61,7 @@ public class EventServiceImpl implements EventService {
     }
 
     @Override
-    public TeamsResponseDto teamUp(Long eventId) {
+    public TeamsResponseDto teamUp(Long eventId) throws NoSuchElementException {
         Event event = getEventIfExists(eventId);
         List<Team> teams = event.getTeams();
         var registrations = event.getRegistrations();
@@ -68,7 +69,7 @@ public class EventServiceImpl implements EventService {
         var acceptedRegistrations = filterAcceptedRegistrations(registrations);
         var users = getAllUsersFromRegistrations(acceptedRegistrations);
 
-        PartitionedTeams partitionedTeams = new PartitionedTeams(3, users);
+        PartitionedTeams partitionedTeams = new PartitionedTeams(teams, users, userRepository);
         TeamsResponseDto teamsDto = getDtoFromPTeam(partitionedTeams);
 
         return teamsDto;
@@ -98,7 +99,7 @@ public class EventServiceImpl implements EventService {
         return filteredRegistrations;
     }
 
-    private Event getEventIfExists(Long eventId) {
+    private Event getEventIfExists(Long eventId) throws NoSuchElementException {
         var event = eventRepository.findById(eventId);
         if (event.isEmpty()) {
             throw new NoSuchElementException();
