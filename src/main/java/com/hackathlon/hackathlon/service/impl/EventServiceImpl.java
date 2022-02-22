@@ -20,7 +20,7 @@ import java.util.stream.*;
 public class EventServiceImpl implements EventService {
     private final EventRepository eventRepository;
     private final RegistrationRepository registrationRepository;
-    private final UserRepository userRepository;
+    private final TeamRepository teamRepository;
 
     private final EventMapper eventMapper;
     private final ParticipantMapper participantMapper;
@@ -69,7 +69,7 @@ public class EventServiceImpl implements EventService {
         var acceptedRegistrations = filterAcceptedRegistrations(registrations);
         var users = getAllUsersFromRegistrations(acceptedRegistrations);
 
-        PartitionedTeams partitionedTeams = new PartitionedTeams(teams, users, userRepository);
+        PartitionedTeams partitionedTeams = new PartitionedTeams(teams, users, teamRepository);
         TeamsResponseDto teamsDto = getDtoFromPTeam(partitionedTeams);
 
         return teamsDto;

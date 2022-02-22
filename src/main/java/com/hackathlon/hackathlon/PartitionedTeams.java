@@ -11,12 +11,12 @@ public class PartitionedTeams {
     private final List<Team> teams;
     private final List<User> users;
 
-    private final UserRepository userRepository;
+    private final TeamRepository teamRepository;
 
-    public PartitionedTeams(List<Team> teams, List<User> users, UserRepository userRepository) {
+    public PartitionedTeams(List<Team> teams, List<User> users, TeamRepository teamRepository) {
         this.users = users;
         this.teams = teams;
-        this.userRepository = userRepository;
+        this.teamRepository = teamRepository;
         this.sortUsers();
 
         this.pTeams = new ArrayList<>();
@@ -82,8 +82,10 @@ public class PartitionedTeams {
             PTeam pteam = this.pTeams.get(i);
 
             team.setUsers(pteam.getMembers());
-//            TODO: teamrepo.save?
-//            TODO: also apply fk to users and save?
+            for (User user : team.getUsers()) {
+                user.setTeam(team);
+            }
+            teamRepository.save(team);
         }
     }
 
