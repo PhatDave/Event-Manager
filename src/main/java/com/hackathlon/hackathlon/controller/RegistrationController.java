@@ -53,13 +53,7 @@ public class RegistrationController {
     }
 
     @GetMapping("")
-//    nekaControllerMetoda (@RequestParam int krumpir)
     private ResponseEntity<Page<RegistrationResponseDto>> getRegistrations(@PathVariable Long eventID, Pageable pageable) {
-//        var event = eventService.getById(eventID);
-//        if (event.isEmpty()) {
-////            TODO: help?
-//            return ResponseEntity.notFound();
-//        }
         return ResponseEntity.ok(registrationService.getAllbyEventId(eventID, pageable));
     }
 

@@ -61,7 +61,7 @@ public class EventServiceImpl implements EventService {
     }
 
     @Override
-    public TeamsResponseDto teamUp(Long eventId) throws NoSuchElementException {
+    public TeamsResponseDto teamUp(Long eventId) throws NoSuchElementException, AssertionError {
         Event event = getEventIfExists(eventId);
         List<Team> teams = event.getTeams();
         var registrations = event.getRegistrations();
@@ -69,15 +69,20 @@ public class EventServiceImpl implements EventService {
         var acceptedRegistrations = filterAcceptedRegistrations(registrations);
         var users = getAllUsersFromRegistrations(acceptedRegistrations);
 
-        for (User user : users) {
-//            TODO: ???
-//            TODO: validate if uses have team already
-        }
+        validateUsersHaveNoTeam(users);
 
         PartitionedTeams partitionedTeams = new PartitionedTeams(teams, users, teamRepository);
         TeamsResponseDto teamsDto = getDtoFromPTeam(partitionedTeams);
 
         return teamsDto;
+    }
+
+    private void validateUsersHaveNoTeam(List<User> users) throws AssertionError {
+        for (User user : users) {
+            if (user.getTeam() != null) {
+                throw new AssertionError();
+            }
+        }
     }
 
     private TeamsResponseDto getDtoFromPTeam(PartitionedTeams partitionedTeams) {
