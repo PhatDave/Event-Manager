@@ -119,7 +119,7 @@ public class RegistrationServiceImpl implements RegistrationService {
     private void updateRegistration(InvitationRequestDto invitationRequestDto, Registration registration) {
         registration.setKickoff(invitationRequestDto.getKickoff());
         registration.setParticipation(invitationRequestDto.getParticipation());
-        registration.setStatus(RegistrationStatusEnum.INVITED);
+        registration.setStatus(RegistrationStatusEnum.ACCEPTED);
         registrationRepository.save(registration);
     }
 
