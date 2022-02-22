@@ -70,6 +70,7 @@ public class PartitionedTeams {
     }
 
     public List<PTeam> getTeams() {
+//        TODO: Maybe convert PTeam to Team?
         return this.teams;
     }
 }

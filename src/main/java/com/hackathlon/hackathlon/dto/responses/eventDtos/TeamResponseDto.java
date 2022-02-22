@@ -10,5 +10,5 @@ import java.util.*;
 @NoArgsConstructor
 public class TeamResponseDto {
     private String name;
-    private List<MemberResponseDto> members;
+    private List<String> members;
 }
