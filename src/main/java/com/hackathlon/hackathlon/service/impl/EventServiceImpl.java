@@ -24,7 +24,7 @@ public class EventServiceImpl implements EventService {
 
     private final EventMapper eventMapper;
     private final ParticipantMapper participantMapper;
-    private final TeamResponseMapper teamResponseMapper;
+    private final TeamMapper teamMapper;
 
     @Override
     public List<Event> getAll() {
@@ -69,6 +69,11 @@ public class EventServiceImpl implements EventService {
         var acceptedRegistrations = filterAcceptedRegistrations(registrations);
         var users = getAllUsersFromRegistrations(acceptedRegistrations);
 
+        for (User user : users) {
+//            TODO: ???
+//            TODO: validate if uses have team already
+        }
+
         PartitionedTeams partitionedTeams = new PartitionedTeams(teams, users, teamRepository);
         TeamsResponseDto teamsDto = getDtoFromPTeam(partitionedTeams);
 
@@ -76,7 +81,7 @@ public class EventServiceImpl implements EventService {
     }
 
     private TeamsResponseDto getDtoFromPTeam(PartitionedTeams partitionedTeams) {
-        List<TeamResponseDto> teamDtos = partitionedTeams.getTeams().stream().map(teamResponseMapper::toDto).collect(Collectors.toList());
+        List<TeamResponseDto> teamDtos = partitionedTeams.getTeams().stream().map(teamMapper::toDto).collect(Collectors.toList());
         TeamsResponseDto teamsDto = new TeamsResponseDto(teamDtos);
         return teamsDto;
     }
@@ -121,7 +126,6 @@ public class EventServiceImpl implements EventService {
 
     private void checkEventStatus(Event eventObj) throws IllegalArgumentException {
         if (eventObj.getStatus() == EventStatusEnum.INVITED) {
-//            TODO: good idea?
             throw new IllegalArgumentException();
         }
     }

@@ -101,7 +101,6 @@ public class RegistrationServiceImpl implements RegistrationService {
 
         updateRegistration(invitationRequestDto, registration);
         updateRegistrationUser(invitationRequestDto, registration);
-//        TODO: wtf is invitationRequestDto.getgitlab()
     }
 
     private void validateRegistration(Registration registration) throws IllegalStateException {
