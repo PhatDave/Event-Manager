@@ -9,6 +9,6 @@ import java.util.*;
 @AllArgsConstructor
 @NoArgsConstructor
 public class MemberResponseDto {
-    private List<String> emails;
+    private String email;
 //    TODO: implement default mapping for user -> string
 }
