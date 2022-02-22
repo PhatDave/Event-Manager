@@ -1,5 +1,6 @@
 package com.hackathlon.hackathlon.entity;
 
+import com.hackathlon.hackathlon.enums.*;
 import lombok.*;
 
 import javax.persistence.*;
@@ -38,6 +39,9 @@ public class Event {
 
     @Column(name="weeks")
     private Integer weeks;
+
+    @Column(name="status")
+    private EventStatusEnum status;
 
     @OneToMany(mappedBy="event", cascade=CascadeType.ALL)
     private List<Team> teams;
