@@ -43,7 +43,13 @@ public class EventController {
 
     @PutMapping("/{eventId}/teamUp")
     private ResponseEntity<?> teamUp(@PathVariable Long eventId) {
-        TeamsResponseDto dto = eventService.teamUp(eventId);
-        return ResponseEntity.ok(dto);
+        try {
+            TeamsResponseDto dto = eventService.teamUp(eventId);
+            return ResponseEntity.ok(dto);
+        } catch (NoSuchElementException e) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        } catch (AssertionError e) {
+            return new ResponseEntity<>(HttpStatus.METHOD_NOT_ALLOWED);
+        }
     }
 }
