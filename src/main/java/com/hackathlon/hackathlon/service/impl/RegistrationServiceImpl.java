@@ -96,7 +96,6 @@ public class RegistrationServiceImpl implements RegistrationService {
 
     @Override
     public void handleInvite(String registrationUUID, InvitationRequestDto invitationRequestDto) throws NoSuchElementException, IllegalStateException {
-//        TODO: do stuff
         Registration registration = getRegistrationIfExists(registrationUUID);
         validateRegistration(registration);
 
