@@ -63,6 +63,20 @@ public class RegistrationController {
         return ResponseEntity.ok(registrationService.getAllbyEventId(eventID, pageable));
     }
 
+    @PatchMapping("/{registrationUUID}")
+    private ResponseEntity<RegistrationResponseDto> acceptInvitation(@PathVariable Long eventID, @PathVariable String registrationUUID, @RequestBody InvitationRequestDto invitationRequestDto) {
+        try {
+            registrationService.handleInvite(registrationUUID, invitationRequestDto);
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        }
+        catch (IllegalStateException e) {
+            return new ResponseEntity<>(HttpStatus.METHOD_NOT_ALLOWED);
+        }
+        catch (NoSuchElementException e) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
+
     @PutMapping("/{registrationUUID}/score")
     private ResponseEntity<?> manuallyScoreRegistrationByUUID(@PathVariable Long eventID, @PathVariable String registrationUUID, @RequestBody CommentRequestDto commentRequestDto) {
         var event = eventService.getById(eventID);
