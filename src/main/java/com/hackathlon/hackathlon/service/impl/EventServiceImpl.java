@@ -1,14 +1,16 @@
 package com.hackathlon.hackathlon.service.impl;
 
-import com.hackathlon.hackathlon.dto.requests.eventDtos.EventRequestDto;
+import com.hackathlon.hackathlon.*;
+import com.hackathlon.hackathlon.dto.requests.eventDtos.*;
 import com.hackathlon.hackathlon.dto.responses.eventDtos.*;
 import com.hackathlon.hackathlon.entity.*;
+import com.hackathlon.hackathlon.entity.user.*;
 import com.hackathlon.hackathlon.enums.*;
 import com.hackathlon.hackathlon.mapper.eventMappers.*;
 import com.hackathlon.hackathlon.repository.*;
-import com.hackathlon.hackathlon.service.EventService;
-import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Service;
+import com.hackathlon.hackathlon.service.*;
+import lombok.*;
+import org.springframework.stereotype.*;
 
 import java.util.*;
 import java.util.stream.*;
@@ -18,8 +20,10 @@ import java.util.stream.*;
 public class EventServiceImpl implements EventService {
     private final EventRepository eventRepository;
     private final RegistrationRepository registrationRepository;
+
     private final EventMapper eventMapper;
     private final ParticipantMapper participantMapper;
+    private final TeamResponseMapper teamResponseMapper;
 
     @Override
     public List<Event> getAll() {
@@ -53,6 +57,53 @@ public class EventServiceImpl implements EventService {
         List<ParticipantResponseDto> participants = registrations.stream().map(participantMapper::toDto).collect(Collectors.toList());
         ParticipantsResponseDto participantsDto = new ParticipantsResponseDto(participants);
         return participantsDto;
+    }
+
+    @Override
+    public TeamsResponseDto teamUp(Long eventId) {
+        Event event = getEventIfExists(eventId);
+        List<Team> teams = event.getTeams();
+        var registrations = event.getRegistrations();
+
+        var acceptedRegistrations = filterAcceptedRegistrations(registrations);
+        var users = getAllUsersFromRegistrations(acceptedRegistrations);
+
+        PartitionedTeams partitionedTeams = new PartitionedTeams(3, users);
+        TeamsResponseDto teamsDto = getDtoFromPTeam(partitionedTeams);
+
+        return teamsDto;
+    }
+
+    private TeamsResponseDto getDtoFromPTeam(PartitionedTeams partitionedTeams) {
+        List<TeamResponseDto> teamDtos = partitionedTeams.getTeams().stream().map(teamResponseMapper::toDto).collect(Collectors.toList());
+        TeamsResponseDto teamsDto = new TeamsResponseDto(teamDtos);
+        return teamsDto;
+    }
+
+    private List<User> getAllUsersFromRegistrations(List<Registration> acceptedRegistrations) {
+        ArrayList<User> users = new ArrayList<>();
+        for (Registration reg : acceptedRegistrations) {
+            users.add(reg.getUser());
+        }
+        return users;
+    }
+
+    private List<Registration> filterAcceptedRegistrations(List<Registration> registrations) {
+        ArrayList<Registration> filteredRegistrations = new ArrayList<Registration>();
+        for (Registration reg : registrations) {
+            if (reg.getStatus() == RegistrationStatusEnum.ACCEPTED) {
+                filteredRegistrations.add(reg);
+            }
+        }
+        return filteredRegistrations;
+    }
+
+    private Event getEventIfExists(Long eventId) {
+        var event = eventRepository.findById(eventId);
+        if (event.isEmpty()) {
+            throw new NoSuchElementException();
+        }
+        return event.get();
     }
 
     private void setEventStatus(Event eventObj) {
