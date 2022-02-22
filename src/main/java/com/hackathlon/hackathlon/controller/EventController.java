@@ -5,7 +5,6 @@ import com.hackathlon.hackathlon.dto.responses.eventDtos.*;
 import com.hackathlon.hackathlon.entity.*;
 import com.hackathlon.hackathlon.service.*;
 import lombok.*;
-import org.apache.coyote.*;
 import org.springframework.dao.*;
 import org.springframework.http.*;
 import org.springframework.web.bind.annotation.*;
@@ -35,18 +34,16 @@ public class EventController {
         try {
             ParticipantsResponseDto participants = eventService.inviteParticipants(eventId);
             return ResponseEntity.ok(participants);
-        }
-        catch (NoSuchElementException e) {
+        } catch (NoSuchElementException e) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
-        catch (IllegalArgumentException e) {
+        } catch (IllegalArgumentException e) {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
+    }
 
     @PutMapping("/{eventId}/teamUp")
     private ResponseEntity<?> teamUp(@PathVariable Long eventId) {
-//        TODO: do stuff
-        eventService.teamUp(eventId);
-        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        TeamsResponseDto dto = eventService.teamUp(eventId);
+        return ResponseEntity.ok(dto);
     }
 }
