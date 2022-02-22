@@ -3,6 +3,7 @@ package com.hackathlon.hackathlon.service.impl;
 import com.hackathlon.hackathlon.dto.requests.eventDtos.EventRequestDto;
 import com.hackathlon.hackathlon.dto.responses.eventDtos.*;
 import com.hackathlon.hackathlon.entity.*;
+import com.hackathlon.hackathlon.enums.*;
 import com.hackathlon.hackathlon.mapper.eventMappers.*;
 import com.hackathlon.hackathlon.repository.*;
 import com.hackathlon.hackathlon.service.EventService;
@@ -38,17 +39,39 @@ public class EventServiceImpl implements EventService {
     }
 
     @Override
-    public ParticipantsResponseDto inviteParticipants(Long eventId) throws NoSuchElementException {
+    public ParticipantsResponseDto inviteParticipants(Long eventId) throws NoSuchElementException, IllegalArgumentException {
         var event = eventRepository.findById(eventId);
         Event eventObj = getEventIfExists(event);
+        checkEventStatus(eventObj);
+        setEventStatus(eventObj);
 
         var registrations = registrationRepository.findAllByEventID(eventId);
         sortRegistrationsByScore(registrations);
         registrations = getMaxRegistrations(eventObj, registrations);
+        setRegistrationsStatus(registrations);
 
         List<ParticipantResponseDto> participants = registrations.stream().map(participantMapper::toDto).collect(Collectors.toList());
         ParticipantsResponseDto participantsDto = new ParticipantsResponseDto(participants);
         return participantsDto;
+    }
+
+    private void setEventStatus(Event eventObj) {
+        eventObj.setStatus(EventStatusEnum.INVITED);
+        eventRepository.save(eventObj);
+    }
+
+    private void setRegistrationsStatus(List<Registration> registrations) {
+        for (Registration reg : registrations) {
+            reg.setStatus(RegistrationStatusEnum.INVITED);
+            registrationRepository.save(reg);
+        }
+    }
+
+    private void checkEventStatus(Event eventObj) throws IllegalArgumentException {
+        if (eventObj.getStatus() == EventStatusEnum.INVITED) {
+//            TODO: good idea?
+            throw new IllegalArgumentException();
+        }
     }
 
     private Event getEventIfExists(Optional<Event> event) throws NoSuchElementException {

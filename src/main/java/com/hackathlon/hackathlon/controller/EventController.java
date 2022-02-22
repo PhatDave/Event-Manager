@@ -32,7 +32,15 @@ public class EventController {
 
     @PutMapping("/{eventId}/invite")
     private ResponseEntity<?> invite(@PathVariable Long eventId) {
-        ParticipantsResponseDto participants = eventService.inviteParticipants(eventId);
-        return ResponseEntity.ok(participants);
+        try {
+            ParticipantsResponseDto participants = eventService.inviteParticipants(eventId);
+            return ResponseEntity.ok(participants);
+        }
+        catch (NoSuchElementException e) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+        catch (IllegalArgumentException e) {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
     }
 }
