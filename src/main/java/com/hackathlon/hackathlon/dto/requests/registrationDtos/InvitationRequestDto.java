@@ -12,5 +12,5 @@ public class InvitationRequestDto {
     private Boolean kickoff;
     @JsonProperty("t-shirt")
     private String tshirt;
-    private String gitlab;
+//    private String gitlab;
 }
