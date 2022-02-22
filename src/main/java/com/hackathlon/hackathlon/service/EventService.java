@@ -11,4 +11,5 @@ public interface EventService {
     Optional<Event> getById(Long id);
     Event create(EventRequestDto dto);
     ParticipantsResponseDto inviteParticipants(Long id);
+    TeamsResponseDto teamUp(Long eventId);
 }

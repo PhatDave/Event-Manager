@@ -42,5 +42,11 @@ public class EventController {
         catch (IllegalArgumentException e) {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
+
+    @PutMapping("/{eventId}/teamUp")
+    private ResponseEntity<?> teamUp(@PathVariable Long eventId) {
+//        TODO: do stuff
+        eventService.teamUp(eventId);
+        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 }
