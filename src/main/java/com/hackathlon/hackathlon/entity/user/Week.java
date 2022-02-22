@@ -28,6 +28,6 @@ public class Week {
     private Integer weekNumber;
 
     @JoinColumn(name="user")
-    @ManyToMany
-    private List<User> user;
+    @ManyToOne
+    private User user;
 }

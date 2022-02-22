@@ -42,7 +42,7 @@ public class User {
     private Registration registration;
 
     @Column(name="weeks")
-    @ManyToMany(mappedBy="user", cascade=CascadeType.ALL)
+    @OneToMany(mappedBy="user", cascade=CascadeType.ALL)
     private List<Week> weeks;
 
     @ManyToOne(cascade = CascadeType.ALL)
