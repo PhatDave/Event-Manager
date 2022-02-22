@@ -17,6 +17,7 @@ import java.util.*;
 @RequiredArgsConstructor
 public class EventController {
     private final EventService eventService;
+    private final WeekService weekService;
 
     @PostMapping
     private ResponseEntity<?> create(@RequestBody EventRequestDto eventRequestDto) {
@@ -49,6 +50,21 @@ public class EventController {
         } catch (NoSuchElementException e) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         } catch (AssertionError e) {
+            return new ResponseEntity<>(HttpStatus.METHOD_NOT_ALLOWED);
+        }
+    }
+
+    @PutMapping("/{eventId}/participants/{userId}/week/{weekNo}")
+    private ResponseEntity<?> addWeekProgress(@PathVariable Long eventId,
+                                              @PathVariable Long userId,
+                                              @PathVariable Integer weekNo,
+                                              @RequestBody WeekReportRequestDto dto) {
+        try {
+            weekService.create(eventId, userId, weekNo, dto);
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        } catch (NoSuchElementException e) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        } catch (IllegalArgumentException e) {
             return new ResponseEntity<>(HttpStatus.METHOD_NOT_ALLOWED);
         }
     }
