@@ -5,6 +5,7 @@ import com.hackathlon.hackathlon.dto.responses.registrationDtos.*;
 import com.hackathlon.hackathlon.entity.*;
 import com.hackathlon.hackathlon.service.*;
 import lombok.*;
+import org.springframework.data.domain.*;
 import org.springframework.http.*;
 import org.springframework.web.bind.annotation.*;
 
@@ -49,6 +50,12 @@ public class RegistrationController {
     private ResponseEntity<RegistrationResponseDto> getRegistrationByUUID(@PathVariable Long eventID, @PathVariable String registrationUUID) {
         var dto = registrationService.getRegistrationDtoByUUID(registrationUUID);
         return ResponseEntity.ok(dto);
+    }
+
+    @GetMapping("")
+//    nekaControllerMetoda (@RequestParam int krumpir)
+    private ResponseEntity<Page<RegistrationResponseDto>> getRegistrations(@PathVariable Long eventID, Pageable pageable) {
+        return ResponseEntity.ok(registrationService.getAllbyEventId(eventID, pageable));
     }
 
     @PutMapping("/{registrationUUID}/score")

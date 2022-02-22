@@ -9,15 +9,19 @@ import com.hackathlon.hackathlon.mapper.registrationMappers.*;
 import com.hackathlon.hackathlon.repository.*;
 import com.hackathlon.hackathlon.service.RegistrationService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.*;
 import org.springframework.stereotype.Service;
 
+import java.sql.*;
 import java.util.*;
+import java.util.stream.*;
 
 @Service
 @RequiredArgsConstructor
 public class RegistrationServiceImpl implements RegistrationService {
     private final RegistrationRepository registrationRepository;
     private final RegistrationMapper registrationMapper;
+    private final MultipleRegistrationMapper multipleRegistrationMapper;
     private final EventRepository eventRepository;
 
     @Override
@@ -82,5 +86,11 @@ public class RegistrationServiceImpl implements RegistrationService {
         }
 
         registration.setScore(score);
+    }
+
+    @Override
+    public Page<RegistrationResponseDto> getAllbyEventId(Long eventID, Pageable pageable) {
+        Page<Registration> registrationpage = registrationRepository.findAllByEventID(eventID, pageable);
+        return registrationpage.map(registrationMapper::toDto);
     }
 }
