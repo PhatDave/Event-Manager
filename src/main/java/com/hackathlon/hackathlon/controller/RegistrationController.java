@@ -37,8 +37,8 @@ public class RegistrationController {
 
     @DeleteMapping("/{registrationUUID}")
     private ResponseEntity<?> deleteRegistrationByUUID(@PathVariable Long eventID, @PathVariable String registrationUUID) {
-        var event = eventService.getById(eventID);
-        var registration = registrationService.getByUUID(registrationUUID);
+        Optional<Event> event = eventService.getById(eventID);
+        Optional<Registration> registration = registrationService.getByUUID(registrationUUID);
         if (event.isEmpty() || registration.isEmpty()) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
@@ -48,8 +48,8 @@ public class RegistrationController {
 
     @GetMapping("/{registrationUUID}")
     private ResponseEntity<RegistrationResponseDto> getRegistrationByUUID(@PathVariable Long eventID, @PathVariable String registrationUUID) {
-        var dto = registrationService.getRegistrationDtoByUUID(registrationUUID);
-        return ResponseEntity.ok(dto);
+        RegistrationResponseDto registrationDtoByUUID = registrationService.getRegistrationDtoByUUID(registrationUUID);
+        return ResponseEntity.ok(registrationDtoByUUID);
     }
 
     @GetMapping("")
@@ -73,13 +73,13 @@ public class RegistrationController {
 
     @PutMapping("/{registrationUUID}/score")
     private ResponseEntity<?> manuallyScoreRegistrationByUUID(@PathVariable Long eventID, @PathVariable String registrationUUID, @RequestBody CommentRequestDto commentRequestDto) {
-        var event = eventService.getById(eventID);
-        var registrationOpt = registrationService.getByUUID(registrationUUID);
+        Optional<Event> event = eventService.getById(eventID);
+        Optional<Registration> registrationOptional = registrationService.getByUUID(registrationUUID);
         try {
-            if (registrationOpt.isEmpty()) throw new NoSuchElementException();
+            if (registrationOptional.isEmpty()) throw new NoSuchElementException();
             if (event.isEmpty()) throw new NoSuchElementException();
 
-            Registration registration = registrationOpt.get();
+            Registration registration = registrationOptional.get();
             commentService.create(registration.getID(), commentRequestDto);
         } catch (NumberFormatException e) {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);

@@ -45,7 +45,7 @@ public class WeekServiceImpl implements WeekService {
     }
 
     private Event getEventIfExists(Long eventId) throws NoSuchElementException {
-        var event = eventRepository.findById(eventId);
+        Optional<Event> event = eventRepository.findById(eventId);
         if (event.isEmpty()) {
             throw new NoSuchElementException();
         }
@@ -53,7 +53,7 @@ public class WeekServiceImpl implements WeekService {
     }
 
     private User getUserIfExists(Long userId) throws NoSuchElementException {
-        var user = userRepository.findById(userId);
+        Optional<User> user = userRepository.findById(userId);
         if (user.isEmpty()) {
             throw new NoSuchElementException();
         }

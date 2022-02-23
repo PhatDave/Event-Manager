@@ -45,12 +45,12 @@ public class EventServiceImpl implements EventService {
 
     @Override
     public ParticipantsResponseDto inviteParticipants(Long eventId) throws NoSuchElementException, IllegalArgumentException {
-        var event = eventRepository.findById(eventId);
+        Optional<Event> event = eventRepository.findById(eventId);
         Event eventObj = getEventIfExists(event);
         checkEventStatus(eventObj);
         setEventStatus(eventObj);
 
-        var registrations = registrationRepository.findAllByEventID(eventId);
+        List<Registration> registrations = registrationRepository.findAllByEventID(eventId);
         sortRegistrationsByScore(registrations);
         registrations = getMaxRegistrations(eventObj, registrations);
         setRegistrationsStatus(registrations);
@@ -64,10 +64,10 @@ public class EventServiceImpl implements EventService {
     public TeamsResponseDto teamUp(Long eventId) throws NoSuchElementException, AssertionError {
         Event event = getEventIfExists(eventId);
         List<Team> teams = event.getTeams();
-        var registrations = event.getRegistrations();
+        List<Registration> registrations = event.getRegistrations();
 
-        var acceptedRegistrations = filterAcceptedRegistrations(registrations);
-        var users = getAllUsersFromRegistrations(acceptedRegistrations);
+        List<Registration> acceptedRegistrations = filterAcceptedRegistrations(registrations);
+        List<User> users = getAllUsersFromRegistrations(acceptedRegistrations);
 
         validateUsersHaveNoTeam(users);
 
@@ -110,7 +110,7 @@ public class EventServiceImpl implements EventService {
     }
 
     private Event getEventIfExists(Long eventId) throws NoSuchElementException {
-        var event = eventRepository.findById(eventId);
+        Optional<Event> event = eventRepository.findById(eventId);
         if (event.isEmpty()) {
             throw new NoSuchElementException();
         }

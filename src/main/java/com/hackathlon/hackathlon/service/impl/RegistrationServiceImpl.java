@@ -123,7 +123,7 @@ public class RegistrationServiceImpl implements RegistrationService {
     }
 
     private Registration getRegistrationIfExists(String registrationUUID) throws NoSuchElementException {
-        var registration = registrationRepository.findByUUID(registrationUUID);
+        Optional<Registration> registration = registrationRepository.findByUUID(registrationUUID);
         if (registration.isEmpty()) {
             throw new NoSuchElementException();
         }
