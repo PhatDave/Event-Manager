@@ -39,6 +39,7 @@ public class EventServiceImpl implements EventService {
     @Override
     public Event create(EventRequestDto dto) {
         Event event = eventMapper.toEntity(dto);
+        event.setStatus(EventStatusEnum.NOT_INVITED);
         Event savedEvent = eventRepository.save(event);
         return savedEvent;
     }

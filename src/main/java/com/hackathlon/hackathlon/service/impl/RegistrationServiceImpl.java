@@ -57,6 +57,7 @@ public class RegistrationServiceImpl implements RegistrationService {
         Registration reg = registrationMapper.toEntity(dto);
         reg.setEvent(eventRepository.getById(eventID));
         reg.setUUID(UUID.randomUUID().toString());
+        reg.setStatus(RegistrationStatusEnum.NOT_INVITED);
         this.calculateScore(reg);
         Registration savedReg = registrationRepository.save(reg);
         return savedReg;
