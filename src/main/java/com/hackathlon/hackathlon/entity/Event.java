@@ -2,14 +2,9 @@ package com.hackathlon.hackathlon.entity;
 
 import com.hackathlon.hackathlon.enums.*;
 import lombok.*;
-import org.hibernate.annotations.*;
 
 import javax.persistence.*;
-import javax.persistence.CascadeType;
-import javax.persistence.Entity;
-import javax.persistence.Table;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 @Getter
 @Setter

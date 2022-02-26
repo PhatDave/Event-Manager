@@ -1,9 +1,9 @@
 package com.hackathlon.hackathlon.mapper.eventMappers;
 
-import com.hackathlon.hackathlon.dto.requests.eventDtos.TeamRequestDto;
+import com.hackathlon.hackathlon.dto.requests.eventDtos.*;
 import com.hackathlon.hackathlon.dto.responses.eventDtos.*;
-import com.hackathlon.hackathlon.entity.Team;
-import org.apache.commons.collections4.CollectionUtils;
+import com.hackathlon.hackathlon.entity.*;
+import org.apache.commons.collections4.*;
 import org.mapstruct.*;
 
 import java.util.stream.*;

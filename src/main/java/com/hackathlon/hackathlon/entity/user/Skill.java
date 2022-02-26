@@ -1,12 +1,8 @@
 package com.hackathlon.hackathlon.entity.user;
 
 import lombok.*;
-import org.hibernate.annotations.*;
 
 import javax.persistence.*;
-import javax.persistence.CascadeType;
-import javax.persistence.Entity;
-import javax.persistence.Table;
 
 @Getter
 @Setter

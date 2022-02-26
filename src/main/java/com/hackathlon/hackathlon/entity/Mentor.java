@@ -1,16 +1,8 @@
 package com.hackathlon.hackathlon.entity;
 
-import com.fasterxml.jackson.annotation.*;
-import lombok.AccessLevel;
-import lombok.Getter;
-import lombok.RequiredArgsConstructor;
-import lombok.Setter;
-import org.hibernate.annotations.*;
+import lombok.*;
 
 import javax.persistence.*;
-import javax.persistence.CascadeType;
-import javax.persistence.Entity;
-import javax.persistence.Table;
 
 @Entity
 @Getter

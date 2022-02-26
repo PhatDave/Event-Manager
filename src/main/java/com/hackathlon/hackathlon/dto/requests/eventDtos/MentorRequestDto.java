@@ -1,6 +1,5 @@
 package com.hackathlon.hackathlon.dto.requests.eventDtos;
 
-import com.hackathlon.hackathlon.entity.*;
 import lombok.*;
 
 @Getter

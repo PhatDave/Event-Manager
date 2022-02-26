@@ -2,11 +2,10 @@ package com.hackathlon.hackathlon.service;
 
 import com.hackathlon.hackathlon.dto.requests.registrationDtos.*;
 import com.hackathlon.hackathlon.dto.responses.registrationDtos.*;
-import com.hackathlon.hackathlon.entity.Registration;
+import com.hackathlon.hackathlon.entity.*;
 import org.springframework.data.domain.*;
 
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 public interface RegistrationService {
     List<Registration> getAll();

@@ -42,7 +42,6 @@ public class RegistrationController {
         if (event.isEmpty() || registration.isEmpty()) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
-//        TODO: this deletes everything lol
         this.registrationService.delete(registration.get());
         return new ResponseEntity<>(HttpStatus.OK);
     }

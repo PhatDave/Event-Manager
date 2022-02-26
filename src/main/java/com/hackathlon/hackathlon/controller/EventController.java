@@ -72,9 +72,9 @@ public class EventController {
     }
 
     @GetMapping("/{eventId}/participants")
-    private ResponseEntity<List<DetailedParticipantDto>> getParticipants(@PathVariable Long eventId, Pageable pageable) {
+    private ResponseEntity<DetailedParticipantsDto> getParticipants(@PathVariable Long eventId, Pageable pageable) {
         var detailedParticipants = eventService.getDetailedParticipants(eventId, pageable);
-//        return ResponseEntity.ok(detailedParticipants);
-        return null;
+        var detailedParticipantsDto = new DetailedParticipantsDto(detailedParticipants);
+        return ResponseEntity.ok(detailedParticipantsDto);
     }
 }

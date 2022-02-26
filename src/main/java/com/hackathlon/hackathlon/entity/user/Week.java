@@ -4,7 +4,6 @@ import com.hackathlon.hackathlon.entity.enums.*;
 import lombok.*;
 
 import javax.persistence.*;
-import java.util.*;
 
 @Getter
 @Setter
