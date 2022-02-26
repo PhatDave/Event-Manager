@@ -2,10 +2,12 @@ package com.hackathlon.hackathlon.controller;
 
 import com.hackathlon.hackathlon.dto.requests.eventDtos.*;
 import com.hackathlon.hackathlon.dto.responses.eventDtos.*;
+import com.hackathlon.hackathlon.dto.responses.eventDtos.detailedParticipant.*;
 import com.hackathlon.hackathlon.entity.*;
 import com.hackathlon.hackathlon.service.*;
 import lombok.*;
 import org.springframework.dao.*;
+import org.springframework.data.domain.*;
 import org.springframework.http.*;
 import org.springframework.web.bind.annotation.*;
 
@@ -67,5 +69,12 @@ public class EventController {
         } catch (IllegalArgumentException e) {
             return new ResponseEntity<>(HttpStatus.METHOD_NOT_ALLOWED);
         }
+    }
+
+    @GetMapping("/{eventId}/participants")
+    private ResponseEntity<List<DetailedParticipantDto>> getParticipants(@PathVariable Long eventId, Pageable pageable) {
+        var detailedParticipants = eventService.getDetailedParticipants(eventId, pageable);
+//        return ResponseEntity.ok(detailedParticipants);
+        return null;
     }
 }
