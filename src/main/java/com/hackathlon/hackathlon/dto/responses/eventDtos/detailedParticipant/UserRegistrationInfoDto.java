@@ -7,7 +7,6 @@ import lombok.*;
 @AllArgsConstructor
 @NoArgsConstructor
 public class UserRegistrationInfoDto {
-//    TODO: map this
     Boolean participation;
     Boolean kickoff;
     String tshirt;
