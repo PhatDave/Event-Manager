@@ -2,8 +2,12 @@ package com.hackathlon.hackathlon.entity;
 
 import com.hackathlon.hackathlon.enums.*;
 import lombok.*;
+import org.hibernate.annotations.*;
 
 import javax.persistence.*;
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.Table;
 import java.util.Date;
 import java.util.List;
 
@@ -43,9 +47,9 @@ public class Event {
     @Column(name="status")
     private EventStatusEnum status;
 
-    @OneToMany(mappedBy="event", cascade=CascadeType.ALL)
+    @OneToMany(mappedBy="event", cascade= {CascadeType.ALL})
     private List<Team> teams;
 
-    @OneToMany(mappedBy="event", cascade=CascadeType.ALL)
+    @OneToMany(mappedBy="event", cascade= {CascadeType.ALL})
     private List<Registration> registrations;
 }

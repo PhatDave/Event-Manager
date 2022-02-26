@@ -1,8 +1,12 @@
 package com.hackathlon.hackathlon.entity;
 
 import lombok.*;
+import org.hibernate.annotations.*;
 
 import javax.persistence.*;
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.Table;
 
 @Getter
 @Setter
@@ -22,6 +26,7 @@ public class Comment {
     @Column(name="score")
     private Integer score;
 
+    @OnDelete(action=OnDeleteAction.NO_ACTION)
     @JoinColumn(name="registrationID")
     @ManyToOne(cascade=CascadeType.PERSIST)
     private Registration registration;

@@ -49,7 +49,8 @@ public class RegistrationServiceImpl implements RegistrationService {
 
     @Override
     public void delete(Registration registration) {
-        this.registrationRepository.delete(registration);
+        this.registrationRepository.deleteById(registration.getID());
+//        this.registrationRepository.delete(registration);
     }
 
     @Override
