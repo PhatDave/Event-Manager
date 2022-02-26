@@ -3,13 +3,16 @@ package com.hackathlon.hackathlon.service.impl;
 import com.hackathlon.hackathlon.*;
 import com.hackathlon.hackathlon.dto.requests.eventDtos.*;
 import com.hackathlon.hackathlon.dto.responses.eventDtos.*;
+import com.hackathlon.hackathlon.dto.responses.eventDtos.detailedParticipant.*;
 import com.hackathlon.hackathlon.entity.*;
 import com.hackathlon.hackathlon.entity.user.*;
 import com.hackathlon.hackathlon.enums.*;
 import com.hackathlon.hackathlon.mapper.eventMappers.*;
+import com.hackathlon.hackathlon.mapper.eventMappers.detailedParticipant.*;
 import com.hackathlon.hackathlon.repository.*;
 import com.hackathlon.hackathlon.service.*;
 import lombok.*;
+import org.springframework.data.domain.*;
 import org.springframework.stereotype.*;
 
 import java.util.*;
@@ -25,6 +28,7 @@ public class EventServiceImpl implements EventService {
     private final EventMapper eventMapper;
     private final ParticipantMapper participantMapper;
     private final TeamMapper teamMapper;
+    private final DetailedParticipantDtoMapper detailedParticipantDtoMapper;
 
     @Override
     public List<Event> getAll() {
@@ -76,6 +80,13 @@ public class EventServiceImpl implements EventService {
         TeamsResponseDto teamsDto = getDtoFromPTeam(partitionedTeams);
 
         return teamsDto;
+    }
+
+    @Override
+    public List<DetailedParticipantDto> getDetailedParticipants(Long eventId, Pageable pageable) {
+//        TODO: get pageable registrations?
+        var registrations = registrationRepository.findAllByEventID(eventId);
+        return detailedParticipantDtoMapper.toDto(registrations);
     }
 
     private void validateUsersHaveNoTeam(List<User> users) throws AssertionError {
