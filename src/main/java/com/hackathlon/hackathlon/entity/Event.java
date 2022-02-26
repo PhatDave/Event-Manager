@@ -14,7 +14,7 @@ import java.util.List;
 @Table(name="event")
 public class Event {
     @Id
-    @GeneratedValue(strategy= GenerationType.SEQUENCE, generator="event_sequence")
+    @GeneratedValue(strategy=GenerationType.SEQUENCE, generator="event_sequence")
     @SequenceGenerator(name="event_sequence", allocationSize=10)
     @Setter(AccessLevel.PRIVATE)
     private Long ID;

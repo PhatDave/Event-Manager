@@ -11,16 +11,16 @@ import javax.persistence.*;
 @Table(name="skill")
 public class Skill {
     @Id
-    @GeneratedValue(strategy= GenerationType.SEQUENCE, generator="skill_sequence")
+    @GeneratedValue(strategy=GenerationType.SEQUENCE, generator="skill_sequence")
     @SequenceGenerator(name="skill_sequence", allocationSize=10)
     @Setter(AccessLevel.PRIVATE)
     private Long ID;
 
-    @Column(name = "name")
+    @Column(name="name")
     private String name;
 
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "experienceID")
+    @ManyToOne(cascade=CascadeType.PERSIST)
+    @JoinColumn(name="experienceID")
     private Experience experience;
 
     @Override

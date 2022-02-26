@@ -13,7 +13,7 @@ import java.util.*;
 @Table(name="week")
 public class Week {
     @Id
-    @GeneratedValue(strategy= GenerationType.SEQUENCE, generator="week_sequence")
+    @GeneratedValue(strategy=GenerationType.SEQUENCE, generator="week_sequence")
     @SequenceGenerator(name="week_sequence", allocationSize=10)
     @Setter(AccessLevel.PRIVATE)
     private Long ID;
@@ -27,7 +27,7 @@ public class Week {
     @Column(name="weekNumber")
     private Integer weekNumber;
 
-    @JoinColumn(name="users")
-    @ManyToOne
+    @JoinColumn(name="userId")
+    @ManyToOne(cascade=CascadeType.PERSIST)
     private User user;
 }

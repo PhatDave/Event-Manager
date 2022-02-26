@@ -27,26 +27,22 @@ public class User {
     @Embedded
     Fluff fluff;
 
-    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
+    @OneToOne(mappedBy="user", cascade=CascadeType.ALL)
     private Education education;
 
-    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
+    @OneToOne(mappedBy="user", cascade=CascadeType.ALL)
     private Experience experience;
 
     @JoinColumn(name="teamID")
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade=CascadeType.PERSIST)
     private Team team;
 
     @JoinColumn(name="registration")
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne(cascade=CascadeType.ALL)
     private Registration registration;
 
     @Column(name="weeks")
     @OneToMany(mappedBy="user", cascade=CascadeType.ALL)
     private List<Week> weeks;
-
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "user_id")
-    private Team user;
 
 }

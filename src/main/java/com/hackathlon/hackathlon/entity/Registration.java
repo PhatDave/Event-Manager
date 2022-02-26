@@ -15,34 +15,34 @@ import java.util.*;
 @Table(name="registration")
 public class Registration {
     @Id
-    @GeneratedValue(strategy= GenerationType.SEQUENCE, generator="registration_sequence")
+    @GeneratedValue(strategy=GenerationType.SEQUENCE, generator="registration_sequence")
     @SequenceGenerator(name="registration_sequence", allocationSize=10)
     @Setter(AccessLevel.PRIVATE)
     private Long ID;
 
-    @Column(name = "score")
+    @Column(name="score")
     private Integer score;
 
-    @Column(name = "UUID")
+    @Column(name="UUID")
     private String UUID;
 
-    @Column(name = "participation")
+    @Column(name="participation")
     private Boolean participation;
 
-    @Column(name = "kickoff")
+    @Column(name="kickoff")
     private Boolean kickoff;
 
-    @OneToMany(mappedBy = "registration", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy="registration", cascade=CascadeType.ALL)
     private List<Comment> comments;
 
     @Column(name="status")
     private RegistrationStatusEnum status;
 
-    @JoinColumn(name = "users")
-    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name="userId")
+    @OneToOne(cascade=CascadeType.ALL)
     private User user;
 
-    @JoinColumn(name = "eventID")
-    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name="eventId")
+    @ManyToOne(cascade=CascadeType.PERSIST)
     private Event event;
 }
