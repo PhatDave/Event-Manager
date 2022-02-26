@@ -15,7 +15,7 @@ import org.mapstruct.*;
 )
 public interface DetailedRegistrationMapper {
     @Mapping(source="registration.user", target="personal")
-    @Mapping(source="registration.user", target="experience")
     @Mapping(source="registration.comments", target="comments")
+    @Mapping(source="registration.user.experience", target="experience")
     RegistrationResponseDto toDto(Registration registration);
 }
