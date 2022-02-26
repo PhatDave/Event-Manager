@@ -5,10 +5,11 @@ import com.hackathlon.hackathlon.entity.*;
 import org.mapstruct.*;
 
 @Mapper(
-        uses = {
-        },
         builder = @Builder(disableBuilder = true)
 )
 public interface UserRegistrationInfoMapper {
+    @Mapping(source="registration.participation", target="participation")
+    @Mapping(source="registration.kickoff", target="kickoff")
+    @Mapping(source="registration.user.fluff.TShirt", target="tshirt")
     UserRegistrationInfoDto toDto(Registration registration);
 }
