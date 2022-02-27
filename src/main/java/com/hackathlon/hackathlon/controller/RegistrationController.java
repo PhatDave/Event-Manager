@@ -12,6 +12,9 @@ import org.springframework.web.bind.annotation.*;
 import java.net.*;
 import java.util.*;
 
+//TODO: send emails
+//TODO: get github api thing
+
 @RestController
 @RequestMapping("/event/{eventID}/registrations")
 @RequiredArgsConstructor
