@@ -27,7 +27,6 @@ public class WeekServiceImpl implements WeekService {
                        WeekReportRequestDto dto) throws NoSuchElementException, IllegalArgumentException {
 
         Event event = getEventIfExists(eventId);
-//        TODO: assert user is part of event?
         User user = getUserIfExists(userId);
         validateWeekNo(weekNo, event);
 

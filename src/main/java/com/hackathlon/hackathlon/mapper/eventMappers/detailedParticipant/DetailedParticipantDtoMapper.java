@@ -4,6 +4,7 @@ import com.hackathlon.hackathlon.dto.responses.eventDtos.detailedParticipant.*;
 import com.hackathlon.hackathlon.entity.*;
 import com.hackathlon.hackathlon.mapper.eventMappers.*;
 import org.mapstruct.*;
+import org.springframework.data.domain.*;
 
 import java.util.*;
 
@@ -16,9 +17,8 @@ import java.util.*;
         builder = @Builder(disableBuilder = true)
 )
 public interface DetailedParticipantDtoMapper {
-    List<DetailedParticipantDto> toDto(List<Registration> registrations);
+    List<DetailedParticipantDto> toDto(Page<Registration> registrations);
 
-//    TODO: have the dto match the specifications
     @Mapping(source=".", target="registration")
     @Mapping(source=".", target="additionalInfo")
     @Mapping(source="registration.user", target="weekProgress")

@@ -85,7 +85,7 @@ public class EventServiceImpl implements EventService {
     @Override
     public List<DetailedParticipantDto> getDetailedParticipants(Long eventId, Pageable pageable) {
 //        TODO: get pageable registrations?
-        var registrations = registrationRepository.findAllByEventID(eventId);
+        var registrations = registrationRepository.findAllByEventID(eventId, pageable);
         return detailedParticipantDtoMapper.toDto(registrations);
     }
 
