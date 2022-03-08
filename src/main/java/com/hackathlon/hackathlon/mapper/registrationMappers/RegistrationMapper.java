@@ -26,7 +26,6 @@ public abstract class RegistrationMapper {
     @Mapping(source = "user.experience", target = "experience")
     public abstract RegistrationResponseDto toDto(Registration registration);
 
-    // TODO testirati
     @Mapping(source = "tshirt", target = "registration.user.fluff.TShirt")
     public abstract void merge(InvitationRequestDto invitationRequestDto, @MappingTarget Registration registration);
 

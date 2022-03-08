@@ -63,7 +63,6 @@ public class RegistrationController {
     @PatchMapping("/{registrationUUID}")
     private ResponseEntity<Void> acceptInvitation(@PathVariable Long eventID, @PathVariable String registrationUUID, @RequestBody InvitationRequestDto invitationRequestDto) {
         try {
-            // TODO isprobaj ovako
             registrationService.handleInvite(registrationUUID, invitationRequestDto);
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }

@@ -102,8 +102,6 @@ public class RegistrationServiceImpl implements RegistrationService {
         registrationMapper.merge(invitationRequestDto, registration);
         registration.setStatus(RegistrationStatusEnum.ACCEPTED);
         registrationRepository.save(registration);
-        // TODO testirati
-//        updateRegistrationUser(invitationRequestDto, registration);
     }
 
     private void validateRegistration(Registration registration) throws IllegalStateException {
