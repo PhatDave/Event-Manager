@@ -63,9 +63,10 @@ public class EventServiceImpl implements EventService {
     @Override
     public TeamsResponseDto teamUp(Long eventId) throws NoSuchElementException, AssertionError {
         Event event = getEventIfExists(eventId);
-        List<Team> teams = event.getTeams();
+        var teams = event.getTeams();
         var registrations = event.getRegistrations();
 
+        // TODO
         var acceptedRegistrations = filterAcceptedRegistrations(registrations);
         var users = getAllUsersFromRegistrations(acceptedRegistrations);
 
@@ -125,8 +126,8 @@ public class EventServiceImpl implements EventService {
     private void setRegistrationsStatus(List<Registration> registrations) {
         for (Registration reg : registrations) {
             reg.setStatus(RegistrationStatusEnum.INVITED);
-            registrationRepository.save(reg);
         }
+        registrationRepository.saveAll(registrations);
     }
 
     private void checkEventStatus(Event eventObj) throws IllegalArgumentException {
@@ -144,7 +145,8 @@ public class EventServiceImpl implements EventService {
     }
 
     private void sortRegistrationsByScore(List<Registration> registrations) {
-        registrations.sort((Registration regA, Registration regB) -> regA.getScore().compareTo(regB.getScore()));
+        // TODO ovo je drugi način koji nudi idea, meni se čini bolji
+        registrations.sort(Comparator.comparing(Registration::getScore));
         Collections.reverse(registrations);
     }
 
