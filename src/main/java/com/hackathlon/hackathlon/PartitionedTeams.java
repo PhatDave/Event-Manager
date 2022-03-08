@@ -85,8 +85,9 @@ public class PartitionedTeams {
             for (User user : team.getUsers()) {
                 user.setTeam(team);
             }
-            teamRepository.save(team);
+
         }
+        teamRepository.saveAll(this.teams);
     }
 
     public List<Team> getTeams() {

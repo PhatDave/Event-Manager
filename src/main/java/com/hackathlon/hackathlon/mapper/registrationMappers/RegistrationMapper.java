@@ -3,6 +3,7 @@ package com.hackathlon.hackathlon.mapper.registrationMappers;
 import com.hackathlon.hackathlon.dto.requests.registrationDtos.*;
 import com.hackathlon.hackathlon.dto.responses.registrationDtos.*;
 import com.hackathlon.hackathlon.entity.*;
+import com.hackathlon.hackathlon.enums.RegistrationStatusEnum;
 import org.mapstruct.*;
 import org.springframework.beans.factory.annotation.*;
 
@@ -24,6 +25,10 @@ public abstract class RegistrationMapper {
     @Mapping(source = "user", target = "personal")
     @Mapping(source = "user.experience", target = "experience")
     public abstract RegistrationResponseDto toDto(Registration registration);
+
+    // TODO testirati
+    @Mapping(source = "tshirt", target = "registration.user.fluff.TShirt")
+    public abstract void merge(InvitationRequestDto invitationRequestDto, @MappingTarget Registration registration);
 
     @AfterMapping
     public void mapAdditionalFields(RegistrationRequestDto dto, @MappingTarget Registration registration) {

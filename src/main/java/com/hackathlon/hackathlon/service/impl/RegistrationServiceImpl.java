@@ -99,8 +99,11 @@ public class RegistrationServiceImpl implements RegistrationService {
         Registration registration = getRegistrationIfExists(registrationUUID);
         validateRegistration(registration);
 
-        updateRegistration(invitationRequestDto, registration);
-        updateRegistrationUser(invitationRequestDto, registration);
+        registrationMapper.merge(invitationRequestDto, registration);
+        registration.setStatus(RegistrationStatusEnum.ACCEPTED);
+        registrationRepository.save(registration);
+        // TODO testirati
+//        updateRegistrationUser(invitationRequestDto, registration);
     }
 
     private void validateRegistration(Registration registration) throws IllegalStateException {
@@ -118,8 +121,8 @@ public class RegistrationServiceImpl implements RegistrationService {
     private void updateRegistration(InvitationRequestDto invitationRequestDto, Registration registration) {
         registration.setKickoff(invitationRequestDto.getKickoff());
         registration.setParticipation(invitationRequestDto.getParticipation());
-        registration.setStatus(RegistrationStatusEnum.ACCEPTED);
-        registrationRepository.save(registration);
+
+
     }
 
     private Registration getRegistrationIfExists(String registrationUUID) throws NoSuchElementException {
