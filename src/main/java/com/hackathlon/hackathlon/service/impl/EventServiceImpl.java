@@ -89,6 +89,17 @@ public class EventServiceImpl implements EventService {
         return detailedParticipantDtoMapper.toDto(registrations);
     }
 
+    @Override
+    public void updateEvents() {
+        var events = eventRepository.findAll();
+        var timeNow = new Date();
+        for (Event event : events) {
+            if (event.getConfirmationNotAfter().after(timeNow) && event.getStatus() == EventStatusEnum.NOT_INVITED) {
+                this.inviteParticipants(event.getID());
+            }
+        }
+    }
+
     private void validateUsersHaveNoTeam(List<User> users) throws AssertionError {
         for (User user : users) {
             if (user.getTeam() != null) {

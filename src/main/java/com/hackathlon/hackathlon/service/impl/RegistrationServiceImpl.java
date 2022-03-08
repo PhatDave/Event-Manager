@@ -30,7 +30,6 @@ public class RegistrationServiceImpl implements RegistrationService {
     @Override
     public RegistrationResponseDto getRegistrationDtoByUUID(String UUID) {
         Optional<Registration> regOpt = registrationRepository.findByUUID(UUID);
-//        TODO: check if regopt exists
         Registration regObj = regOpt.get();
         RegistrationResponseDto dto = registrationMapper.toDto(regObj);
         return dto;

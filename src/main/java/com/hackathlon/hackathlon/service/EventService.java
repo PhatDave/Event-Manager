@@ -15,4 +15,5 @@ public interface EventService {
     ParticipantsResponseDto inviteParticipants(Long id);
     TeamsResponseDto teamUp(Long eventId);
     List<DetailedParticipantDto> getDetailedParticipants(Long eventId, Pageable pageable);
+    void updateEvents();
 }

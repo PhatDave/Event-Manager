@@ -9,6 +9,7 @@ import lombok.*;
 import org.springframework.dao.*;
 import org.springframework.data.domain.*;
 import org.springframework.http.*;
+import org.springframework.scheduling.annotation.*;
 import org.springframework.web.bind.annotation.*;
 
 import java.net.*;
@@ -76,5 +77,11 @@ public class EventController {
         var detailedParticipants = eventService.getDetailedParticipants(eventId, pageable);
         var detailedParticipantsDto = new DetailedParticipantsDto(detailedParticipants);
         return ResponseEntity.ok(detailedParticipantsDto);
+    }
+
+    @Scheduled(cron = "0 12 * * * *")
+    private void closeEvents() {
+        eventService.updateEvents();
+        return;
     }
 }
