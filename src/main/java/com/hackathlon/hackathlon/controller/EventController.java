@@ -78,10 +78,4 @@ public class EventController {
         var detailedParticipantsDto = new DetailedParticipantsDto(detailedParticipants);
         return ResponseEntity.ok(detailedParticipantsDto);
     }
-
-    @Scheduled(cron = "0 12 * * * *")
-    private void closeEvents() {
-        eventService.updateEvents();
-        return;
-    }
 }
