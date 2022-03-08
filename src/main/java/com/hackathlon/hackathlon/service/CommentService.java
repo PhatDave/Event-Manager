@@ -10,5 +10,4 @@ public interface CommentService {
     Optional<Comment> getById(Long id);
 
     Comment create(Long registrationId, CommentRequestDto commentRequestDto) throws NoSuchElementException;
-//    TODO: add UserResponseDto create(UserRequestDto dto);
 }

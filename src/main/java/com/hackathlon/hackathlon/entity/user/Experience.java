@@ -1,9 +1,6 @@
 package com.hackathlon.hackathlon.entity.user;
 
-import lombok.AccessLevel;
-import lombok.Getter;
-import lombok.RequiredArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.*;
@@ -15,24 +12,24 @@ import java.util.*;
 @Table(name="experience")
 public class Experience {
     @Id
-    @GeneratedValue(strategy= GenerationType.SEQUENCE, generator="experience_sequence")
+    @GeneratedValue(strategy=GenerationType.SEQUENCE, generator="experience_sequence")
     @SequenceGenerator(name="experience_sequence", allocationSize=10)
     @Setter(AccessLevel.PRIVATE)
     private Long ID;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "userID")
+    @OneToOne(cascade=CascadeType.ALL)
+    @JoinColumn(name="userID")
     private User user;
 
-    @Column(name = "years")
+    @Column(name="years")
     private Integer years;
 
-    @Column(name = "repositoryUrl")
+    @Column(name="repositoryUrl")
     private String repositoryUrl;
 
-    @Column(name = "summary")
+    @Column(name="summary")
     private String summary;
 
-    @OneToMany(mappedBy = "experience", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy="experience", cascade=CascadeType.ALL)
     private List<Skill> skills;
 }

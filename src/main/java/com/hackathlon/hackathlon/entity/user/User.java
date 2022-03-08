@@ -1,13 +1,10 @@
 package com.hackathlon.hackathlon.entity.user;
 
 import com.hackathlon.hackathlon.entity.*;
-import lombok.AccessLevel;
-import lombok.Getter;
-import lombok.RequiredArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
-import java.util.List;
+import java.util.*;
 
 @Getter
 @Setter
@@ -27,26 +24,22 @@ public class User {
     @Embedded
     Fluff fluff;
 
-    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
+    @OneToOne(mappedBy="user", cascade=CascadeType.ALL)
     private Education education;
 
-    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
+    @OneToOne(mappedBy="user", cascade=CascadeType.ALL)
     private Experience experience;
 
     @JoinColumn(name="teamID")
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade=CascadeType.PERSIST)
     private Team team;
 
     @JoinColumn(name="registration")
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne(cascade=CascadeType.ALL)
     private Registration registration;
 
     @Column(name="weeks")
-    @ManyToMany(mappedBy="user", cascade=CascadeType.ALL)
+    @OneToMany(mappedBy="user", cascade=CascadeType.ALL)
     private List<Week> weeks;
-
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "user_id")
-    private Team user;
 
 }

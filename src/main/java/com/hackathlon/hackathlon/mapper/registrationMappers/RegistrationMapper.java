@@ -12,7 +12,8 @@ import org.springframework.beans.factory.annotation.*;
                 ExperienceMapper.class,
                 CommentMapper.class,
         },
-        builder = @Builder(disableBuilder = true))
+        builder = @Builder(disableBuilder = true)
+)
 public abstract class RegistrationMapper {
     @Autowired
     private ExperienceMapper experienceMapper;

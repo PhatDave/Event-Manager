@@ -1,7 +1,11 @@
 package com.hackathlon.hackathlon.entity;
 
 import lombok.*;
+import org.hibernate.annotations.*;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.Table;
 import javax.persistence.*;
 
 @Getter
@@ -11,7 +15,7 @@ import javax.persistence.*;
 @Table(name="comment")
 public class Comment {
     @Id
-    @GeneratedValue(strategy= GenerationType.SEQUENCE, generator="comment_sequence")
+    @GeneratedValue(strategy=GenerationType.SEQUENCE, generator="comment_sequence")
     @SequenceGenerator(name="comment_sequence", allocationSize=10)
     @Setter(AccessLevel.PRIVATE)
     private Long ID;
@@ -22,7 +26,8 @@ public class Comment {
     @Column(name="score")
     private Integer score;
 
+    @OnDelete(action=OnDeleteAction.NO_ACTION)
     @JoinColumn(name="registrationID")
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade=CascadeType.PERSIST)
     private Registration registration;
 }

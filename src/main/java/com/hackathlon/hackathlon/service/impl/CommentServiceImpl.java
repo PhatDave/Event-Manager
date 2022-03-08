@@ -37,7 +37,7 @@ public class CommentServiceImpl implements CommentService {
         Registration regObj = registration.get();
 
         comment.setRegistration(regObj);
-        var newScore = comment.getScore() + regObj.getScore();
+        int newScore = comment.getScore() + regObj.getScore();
         regObj.setScore(newScore);
         registrationRepository.save(regObj);
         Comment savedComment = commentRepository.save(comment);

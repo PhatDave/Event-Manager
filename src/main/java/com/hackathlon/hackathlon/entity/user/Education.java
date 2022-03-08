@@ -1,9 +1,6 @@
 package com.hackathlon.hackathlon.entity.user;
 
-import lombok.AccessLevel;
-import lombok.Getter;
-import lombok.RequiredArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 
@@ -25,7 +22,7 @@ public class Education {
     @Column(name="years")
     private Integer years;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne(cascade=CascadeType.PERSIST)
     @JoinColumn(name="userID")
     private User user;
 }

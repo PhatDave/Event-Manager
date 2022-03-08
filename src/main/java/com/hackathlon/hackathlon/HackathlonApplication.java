@@ -2,8 +2,10 @@ package com.hackathlon.hackathlon;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.scheduling.annotation.*;
 
 @SpringBootApplication
+@EnableScheduling
 public class HackathlonApplication {
 
 	public static void main(String[] args) {

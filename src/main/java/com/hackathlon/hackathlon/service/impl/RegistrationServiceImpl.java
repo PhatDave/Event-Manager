@@ -1,15 +1,16 @@
 package com.hackathlon.hackathlon.service.impl;
 
-import com.hackathlon.hackathlon.dto.requests.registrationDtos.RegistrationRequestDto;
+import com.hackathlon.hackathlon.dto.requests.registrationDtos.*;
 import com.hackathlon.hackathlon.dto.responses.registrationDtos.*;
-import com.hackathlon.hackathlon.entity.Registration;
+import com.hackathlon.hackathlon.entity.*;
 import com.hackathlon.hackathlon.entity.user.*;
 import com.hackathlon.hackathlon.enums.*;
 import com.hackathlon.hackathlon.mapper.registrationMappers.*;
 import com.hackathlon.hackathlon.repository.*;
-import com.hackathlon.hackathlon.service.RegistrationService;
-import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Service;
+import com.hackathlon.hackathlon.service.*;
+import lombok.*;
+import org.springframework.data.domain.*;
+import org.springframework.stereotype.*;
 
 import java.util.*;
 
@@ -19,6 +20,7 @@ public class RegistrationServiceImpl implements RegistrationService {
     private final RegistrationRepository registrationRepository;
     private final RegistrationMapper registrationMapper;
     private final EventRepository eventRepository;
+    private final UserRepository userRepository;
 
     @Override
     public List<Registration> getAll() {
@@ -45,7 +47,8 @@ public class RegistrationServiceImpl implements RegistrationService {
 
     @Override
     public void delete(Registration registration) {
-        this.registrationRepository.delete(registration);
+        this.registrationRepository.deleteById(registration.getID());
+//        this.registrationRepository.delete(registration);
     }
 
     @Override
@@ -53,6 +56,7 @@ public class RegistrationServiceImpl implements RegistrationService {
         Registration reg = registrationMapper.toEntity(dto);
         reg.setEvent(eventRepository.getById(eventID));
         reg.setUUID(UUID.randomUUID().toString());
+        reg.setStatus(RegistrationStatusEnum.NOT_INVITED);
         this.calculateScore(reg);
         Registration savedReg = registrationRepository.save(reg);
         return savedReg;
@@ -82,5 +86,47 @@ public class RegistrationServiceImpl implements RegistrationService {
         }
 
         registration.setScore(score);
+    }
+
+    @Override
+    public Page<RegistrationResponseDto> getAllbyEventId(Long eventID, Pageable pageable) {
+        Page<Registration> registrationpage = registrationRepository.findAllByEventID(eventID, pageable);
+        return registrationpage.map(registrationMapper::toDto);
+    }
+
+    @Override
+    public void handleInvite(String registrationUUID, InvitationRequestDto invitationRequestDto) throws NoSuchElementException, IllegalStateException {
+        Registration registration = getRegistrationIfExists(registrationUUID);
+        validateRegistration(registration);
+
+        updateRegistration(invitationRequestDto, registration);
+        updateRegistrationUser(invitationRequestDto, registration);
+    }
+
+    private void validateRegistration(Registration registration) throws IllegalStateException {
+        if (registration.getStatus() != RegistrationStatusEnum.INVITED) {
+            throw new IllegalStateException();
+        }
+    }
+
+    private void updateRegistrationUser(InvitationRequestDto invitationRequestDto, Registration registration) {
+        User user = registration.getUser();
+        user.getFluff().setTShirt(invitationRequestDto.getTshirt());
+        userRepository.save(user);
+    }
+
+    private void updateRegistration(InvitationRequestDto invitationRequestDto, Registration registration) {
+        registration.setKickoff(invitationRequestDto.getKickoff());
+        registration.setParticipation(invitationRequestDto.getParticipation());
+        registration.setStatus(RegistrationStatusEnum.ACCEPTED);
+        registrationRepository.save(registration);
+    }
+
+    private Registration getRegistrationIfExists(String registrationUUID) throws NoSuchElementException {
+        Optional<Registration> registration = registrationRepository.findByUUID(registrationUUID);
+        if (registration.isEmpty()) {
+            throw new NoSuchElementException();
+        }
+        return registration.get();
     }
 }

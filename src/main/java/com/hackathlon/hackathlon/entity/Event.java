@@ -1,10 +1,10 @@
 package com.hackathlon.hackathlon.entity;
 
+import com.hackathlon.hackathlon.enums.*;
 import lombok.*;
 
 import javax.persistence.*;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 @Getter
 @Setter
@@ -13,7 +13,7 @@ import java.util.List;
 @Table(name="event")
 public class Event {
     @Id
-    @GeneratedValue(strategy= GenerationType.SEQUENCE, generator="event_sequence")
+    @GeneratedValue(strategy=GenerationType.SEQUENCE, generator="event_sequence")
     @SequenceGenerator(name="event_sequence", allocationSize=10)
     @Setter(AccessLevel.PRIVATE)
     private Long ID;
@@ -39,9 +39,12 @@ public class Event {
     @Column(name="weeks")
     private Integer weeks;
 
-    @OneToMany(mappedBy="event", cascade=CascadeType.ALL)
+    @Column(name="status")
+    private EventStatusEnum status;
+
+    @OneToMany(mappedBy="event", cascade= {CascadeType.ALL})
     private List<Team> teams;
 
-    @OneToMany(mappedBy="event", cascade=CascadeType.ALL)
+    @OneToMany(mappedBy="event", cascade= {CascadeType.ALL})
     private List<Registration> registrations;
 }

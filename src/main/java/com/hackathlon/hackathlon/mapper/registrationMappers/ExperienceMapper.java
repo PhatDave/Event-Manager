@@ -5,19 +5,16 @@ import com.hackathlon.hackathlon.dto.responses.registrationDtos.*;
 import com.hackathlon.hackathlon.entity.user.*;
 import org.mapstruct.*;
 
-import java.util.*;
-import java.util.stream.*;
-
 @Mapper(
-        uses = {
+        uses={
                 SkillMapper.class,
         },
-        builder = @Builder(disableBuilder=true)
+        builder=@Builder(disableBuilder=true)
 )
 public interface ExperienceMapper {
     Experience toEntity(ExperienceRequestDto dto);
 
-    @Mapping(source = "skills", target = "skills")
+    @Mapping(source="skills", target="skills")
     ExperienceResponseDto toDto(Experience experience);
 
     @AfterMapping

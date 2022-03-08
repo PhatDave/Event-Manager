@@ -5,11 +5,15 @@ import com.hackathlon.hackathlon.dto.responses.registrationDtos.*;
 import com.hackathlon.hackathlon.entity.*;
 import com.hackathlon.hackathlon.service.*;
 import lombok.*;
+import org.springframework.data.domain.*;
 import org.springframework.http.*;
 import org.springframework.web.bind.annotation.*;
 
 import java.net.*;
 import java.util.*;
+
+//TODO: send emails
+//TODO: get github api thing
 
 @RestController
 @RequestMapping("/event/{eventID}/registrations")
@@ -36,8 +40,8 @@ public class RegistrationController {
 
     @DeleteMapping("/{registrationUUID}")
     private ResponseEntity<?> deleteRegistrationByUUID(@PathVariable Long eventID, @PathVariable String registrationUUID) {
-        var event = eventService.getById(eventID);
-        var registration = registrationService.getByUUID(registrationUUID);
+        Optional<Event> event = eventService.getById(eventID);
+        Optional<Registration> registration = registrationService.getByUUID(registrationUUID);
         if (event.isEmpty() || registration.isEmpty()) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
@@ -47,19 +51,38 @@ public class RegistrationController {
 
     @GetMapping("/{registrationUUID}")
     private ResponseEntity<RegistrationResponseDto> getRegistrationByUUID(@PathVariable Long eventID, @PathVariable String registrationUUID) {
-        var dto = registrationService.getRegistrationDtoByUUID(registrationUUID);
-        return ResponseEntity.ok(dto);
+        RegistrationResponseDto registrationDtoByUUID = registrationService.getRegistrationDtoByUUID(registrationUUID);
+        return ResponseEntity.ok(registrationDtoByUUID);
+    }
+
+    @GetMapping("")
+    private ResponseEntity<Page<RegistrationResponseDto>> getRegistrations(@PathVariable Long eventID, Pageable pageable) {
+        return ResponseEntity.ok(registrationService.getAllbyEventId(eventID, pageable));
+    }
+
+    @PatchMapping("/{registrationUUID}")
+    private ResponseEntity<RegistrationResponseDto> acceptInvitation(@PathVariable Long eventID, @PathVariable String registrationUUID, @RequestBody InvitationRequestDto invitationRequestDto) {
+        try {
+            registrationService.handleInvite(registrationUUID, invitationRequestDto);
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        }
+        catch (IllegalStateException e) {
+            return new ResponseEntity<>(HttpStatus.METHOD_NOT_ALLOWED);
+        }
+        catch (NoSuchElementException e) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
     }
 
     @PutMapping("/{registrationUUID}/score")
     private ResponseEntity<?> manuallyScoreRegistrationByUUID(@PathVariable Long eventID, @PathVariable String registrationUUID, @RequestBody CommentRequestDto commentRequestDto) {
-        var event = eventService.getById(eventID);
-        var registrationOpt = registrationService.getByUUID(registrationUUID);
+        Optional<Event> event = eventService.getById(eventID);
+        Optional<Registration> registrationOptional = registrationService.getByUUID(registrationUUID);
         try {
-            if (registrationOpt.isEmpty()) throw new NoSuchElementException();
+            if (registrationOptional.isEmpty()) throw new NoSuchElementException();
             if (event.isEmpty()) throw new NoSuchElementException();
 
-            Registration registration = registrationOpt.get();
+            Registration registration = registrationOptional.get();
             commentService.create(registration.getID(), commentRequestDto);
         } catch (NumberFormatException e) {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
