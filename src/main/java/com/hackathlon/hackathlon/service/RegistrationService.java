@@ -1,6 +1,6 @@
 package com.hackathlon.hackathlon.service;
 
-import com.hackathlon.hackathlon.dto.requests.registrationDtos.RegistrationRequestDto;
+import com.hackathlon.hackathlon.dto.requests.registrationDtos.*;
 import com.hackathlon.hackathlon.dto.responses.registrationDtos.*;
 import com.hackathlon.hackathlon.entity.Registration;
 import org.springframework.data.domain.*;
@@ -20,4 +20,6 @@ public interface RegistrationService {
     void calculateScore(Registration registration);
 
     Page<RegistrationResponseDto> getAllbyEventId(Long eventID, Pageable pageable);
+
+    void handleInvite(String registrationUUID, InvitationRequestDto invitationRequestDto);
 }

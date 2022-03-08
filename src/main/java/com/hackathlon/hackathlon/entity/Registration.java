@@ -2,6 +2,7 @@ package com.hackathlon.hackathlon.entity;
 
 
 import com.hackathlon.hackathlon.entity.user.*;
+import com.hackathlon.hackathlon.enums.*;
 import lombok.*;
 
 import javax.persistence.*;
@@ -33,6 +34,9 @@ public class Registration {
 
     @OneToMany(mappedBy = "registration", cascade = CascadeType.ALL)
     private List<Comment> comments;
+
+    @Column(name="status")
+    private RegistrationStatusEnum status;
 
     @JoinColumn(name = "users")
     @OneToOne(cascade = CascadeType.ALL)

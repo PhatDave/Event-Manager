@@ -27,7 +27,7 @@ public class Week {
     @Column(name="weekNumber")
     private Integer weekNumber;
 
-    @JoinColumn(name="user")
-    @ManyToMany
-    private List<User> user;
+    @JoinColumn(name="users")
+    @ManyToOne
+    private User user;
 }
