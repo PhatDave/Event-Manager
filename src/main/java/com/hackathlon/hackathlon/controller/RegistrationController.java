@@ -22,6 +22,7 @@ public class RegistrationController {
     private final RegistrationService registrationService;
     private final EventService eventService;
     private final CommentService commentService;
+    private final GithubRetrieveService githubRetrieveService;
 
     @PostMapping
     private ResponseEntity<?> createRegistration(@PathVariable Long eventID, @RequestBody RegistrationRequestDto registrationRequestDto) {
@@ -57,6 +58,7 @@ public class RegistrationController {
 
     @GetMapping("")
     private ResponseEntity<Page<RegistrationResponseDto>> getRegistrations(@PathVariable Long eventID, Pageable pageable) {
+        githubRetrieveService.get("PhatDave");
         return ResponseEntity.ok(registrationService.getAllbyEventId(eventID, pageable));
     }
 
