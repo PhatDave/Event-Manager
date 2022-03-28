@@ -1,7 +1,9 @@
 package com.hackathlon.hackathlon.service;
 
-import org.springframework.stereotype.*;
+import com.hackathlon.hackathlon.dto.githubRelatedDtos.GithubRepoDto;
+
+import java.util.List;
 
 public interface GithubRetrieveService {
-    void get(String name);
+    List<GithubRepoDto> get(String name);
 }

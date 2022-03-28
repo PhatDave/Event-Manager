@@ -45,7 +45,6 @@ public class RegistrationController {
 
     @GetMapping("")
     private ResponseEntity<Page<RegistrationResponseDto>> getRegistrations(@PathVariable Long eventID, Pageable pageable) {
-        // todo implement this
         githubRetrieveService.get("PhatDave");
         return ResponseEntity.ok(registrationService.getAllbyEventId(eventID, pageable));
     }

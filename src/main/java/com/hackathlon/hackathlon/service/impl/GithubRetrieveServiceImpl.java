@@ -22,16 +22,16 @@ public class GithubRetrieveServiceImpl implements GithubRetrieveService {
         this.webClient = webClientBuilder.baseUrl("").build();
     }
 
-    public void get(String name) {
+    public List<GithubRepoDto> get(String name) {
         var uri = "https://api.github.com/users/" + name + "/repos";
         var dto = this.webClient
                 .get()
-//                .uri(uriBuilder -> uriBuilder.path(githubRoot).build(name))
                 .uri(uri)
                 .accept(MediaType.APPLICATION_JSON)
                 .retrieve()
-                .toEntity(new ParameterizedTypeReference<List<GithubResponseDto>>() {})
+                .toEntity(new ParameterizedTypeReference<List<GithubRepoDto>>() {})
                 .block();
-        System.out.println(dto);
+        // todo getBody may produce null??
+        return dto.getBody();
     }
 }
