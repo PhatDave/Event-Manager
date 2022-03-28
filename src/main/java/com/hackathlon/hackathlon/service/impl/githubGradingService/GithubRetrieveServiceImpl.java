@@ -1,8 +1,7 @@
-package com.hackathlon.hackathlon.service.impl;
+package com.hackathlon.hackathlon.service.impl.githubGradingService;
 
 
 import com.hackathlon.hackathlon.dto.githubRelatedDtos.*;
-import com.hackathlon.hackathlon.service.*;
 import org.springframework.beans.factory.annotation.*;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.*;
@@ -30,8 +29,13 @@ public class GithubRetrieveServiceImpl implements GithubRetrieveService {
 
     @Override
     public List<GithubRepoDto> getByUrl(String url) {
-        List<GithubRepoDto> dto = runWebClient(url);
-        return dto;
+        String name = getNameFromUrl(url);
+        return get(name);
+    }
+
+    private String getNameFromUrl(String url) {
+        String name = url.split("https://github.com/")[1];
+        return name;
     }
 
     private List<GithubRepoDto> runWebClient(String uri) {

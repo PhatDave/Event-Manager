@@ -1,4 +1,4 @@
-package com.hackathlon.hackathlon.service;
+package com.hackathlon.hackathlon.service.impl.githubGradingService;
 
 import com.hackathlon.hackathlon.dto.githubRelatedDtos.GithubRepoDto;
 

@@ -3,14 +3,17 @@ package com.hackathlon.hackathlon.controller;
 import com.hackathlon.hackathlon.dto.requests.registrationDtos.*;
 import com.hackathlon.hackathlon.dto.responses.registrationDtos.*;
 import com.hackathlon.hackathlon.entity.*;
+import com.hackathlon.hackathlon.entity.user.User;
 import com.hackathlon.hackathlon.service.*;
+import com.hackathlon.hackathlon.service.impl.githubGradingService.GithubGradingService;
+import com.hackathlon.hackathlon.service.impl.githubGradingService.GithubRetrieveService;
 import lombok.*;
 import org.springframework.data.domain.*;
 import org.springframework.http.*;
 import org.springframework.web.bind.annotation.*;
 
 import java.net.*;
-import java.util.*;
+import java.util.Optional;
 
 //TODO: send emails
 //TODO: get github api thing
@@ -21,8 +24,9 @@ import java.util.*;
 public class RegistrationController {
     private final RegistrationService registrationService;
     private final EventService eventService;
+    private final UserService userService;
     private final CommentService commentService;
-    private final GithubRetrieveService githubRetrieveService;
+    private final GithubGradingService githubGradingService;
 
     @PostMapping
     private ResponseEntity<?> createRegistration(@PathVariable Long eventID, @RequestBody RegistrationRequestDto registrationRequestDto) {
@@ -45,7 +49,8 @@ public class RegistrationController {
 
     @GetMapping("")
     private ResponseEntity<Page<RegistrationResponseDto>> getRegistrations(@PathVariable Long eventID, Pageable pageable) {
-        githubRetrieveService.get("PhatDave");
+        User user = userService.getById(253L);
+        githubGradingService.grade(user);
         return ResponseEntity.ok(registrationService.getAllbyEventId(eventID, pageable));
     }
 
