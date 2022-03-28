@@ -8,6 +8,7 @@ import com.hackathlon.hackathlon.enums.*;
 import com.hackathlon.hackathlon.mapper.registrationMappers.*;
 import com.hackathlon.hackathlon.repository.*;
 import com.hackathlon.hackathlon.service.*;
+import com.hackathlon.hackathlon.service.impl.githubGradingService.GithubGradingService;
 import lombok.*;
 import org.springframework.data.domain.*;
 import org.springframework.http.HttpStatus;
@@ -22,7 +23,7 @@ public class RegistrationServiceImpl implements RegistrationService {
     private final RegistrationRepository registrationRepository;
     private final RegistrationMapper registrationMapper;
     private final EventRepository eventRepository;
-    private final UserRepository userRepository;
+    private final GithubGradingService githubGradingService;
 
     @Override
     public List<Registration> getAll() {
@@ -73,7 +74,8 @@ public class RegistrationServiceImpl implements RegistrationService {
         reg.setEvent(eventRepository.getById(eventID));
         reg.setUUID(UUID.randomUUID().toString());
         reg.setStatus(RegistrationStatusEnum.NOT_INVITED);
-        this.calculateScore(reg);
+        calculateScore(reg);
+        reg.setScore(reg.getScore() + githubGradingService.grade(reg.getUser()));
         Registration savedReg = registrationRepository.save(reg);
         return savedReg;
     }
