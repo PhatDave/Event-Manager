@@ -24,37 +24,20 @@ public class EventController {
 
     @PostMapping
     private ResponseEntity<?> create(@RequestBody EventRequestDto eventRequestDto) {
-        try {
-            Event event = eventService.create(eventRequestDto);
-            return ResponseEntity.created(URI.create("/event/" + event.getID())).body("");
-        }
-        catch (DataIntegrityViolationException e) {
-            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-        }
+        Event event = eventService.create(eventRequestDto);
+        return ResponseEntity.created(URI.create("/event/" + event.getID())).body("");
     }
 
     @PutMapping("/{eventId}/invite")
     private ResponseEntity<?> invite(@PathVariable Long eventId) {
-        try {
-            ParticipantsResponseDto participants = eventService.inviteParticipants(eventId);
-            return ResponseEntity.ok(participants);
-        } catch (NoSuchElementException e) {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        } catch (IllegalArgumentException e) {
-            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-        }
+        ParticipantsResponseDto participants = eventService.inviteParticipants(eventId);
+        return ResponseEntity.ok(participants);
     }
 
     @PutMapping("/{eventId}/teamUp")
     private ResponseEntity<?> teamUp(@PathVariable Long eventId) {
-        try {
-            TeamsResponseDto dto = eventService.teamUp(eventId);
-            return ResponseEntity.ok(dto);
-        } catch (NoSuchElementException e) {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        } catch (AssertionError e) {
-            return new ResponseEntity<>(HttpStatus.METHOD_NOT_ALLOWED);
-        }
+        TeamsResponseDto dto = eventService.teamUp(eventId);
+        return ResponseEntity.ok(dto);
     }
 
     @PutMapping("/{eventId}/participants/{userId}/week/{weekNo}")
@@ -62,14 +45,8 @@ public class EventController {
                                               @PathVariable Long userId,
                                               @PathVariable Integer weekNo,
                                               @RequestBody WeekReportRequestDto dto) {
-        try {
-            weekService.create(eventId, userId, weekNo, dto);
-            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-        } catch (NoSuchElementException e) {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        } catch (IllegalArgumentException e) {
-            return new ResponseEntity<>(HttpStatus.METHOD_NOT_ALLOWED);
-        }
+        weekService.create(eventId, userId, weekNo, dto);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
     @GetMapping("/{eventId}/participants")

@@ -28,18 +28,14 @@ public class CommentServiceImpl implements CommentService {
     }
 
     @Override
-    public Comment create(Long registrationId, CommentRequestDto commentRequestDto) throws NoSuchElementException {
+    public Comment create(Long registrationId, CommentRequestDto commentRequestDto) {
         Comment comment = commentMapper.toEntity(commentRequestDto);
-        Optional<Registration> registration = registrationRepository.findById(registrationId);
-        if (registration.isEmpty()) {
-            throw new NoSuchElementException();
-        }
-        Registration regObj = registration.get();
+        Registration registration = registrationRepository.findById(registrationId).orElseThrow(() -> new NoSuchElementException("Registration with id " + registrationId + " not found"));
 
-        comment.setRegistration(regObj);
-        int newScore = comment.getScore() + regObj.getScore();
-        regObj.setScore(newScore);
-        registrationRepository.save(regObj);
+        comment.setRegistration(registration);
+        int newScore = comment.getScore() + registration.getScore();
+        registration.setScore(newScore);
+        registrationRepository.save(registration);
         Comment savedComment = commentRepository.save(comment);
         return savedComment;
     }

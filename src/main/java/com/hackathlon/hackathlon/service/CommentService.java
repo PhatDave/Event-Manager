@@ -9,5 +9,5 @@ public interface CommentService {
     List<Comment> getAll();
     Optional<Comment> getById(Long id);
 
-    Comment create(Long registrationId, CommentRequestDto commentRequestDto) throws NoSuchElementException;
+    Comment create(Long registrationId, CommentRequestDto commentRequestDto);
 }

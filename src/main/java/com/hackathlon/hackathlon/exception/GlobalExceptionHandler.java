@@ -1,5 +1,6 @@
 package com.hackathlon.hackathlon.exception;
 
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -27,6 +28,12 @@ public class GlobalExceptionHandler {
         ErrorDetails errorDetails = this.prepareErrorDetails(ex);
         return new ResponseEntity<>(errorDetails, HttpStatus.NOT_FOUND);
     }
+
+     @ExceptionHandler(value = DataIntegrityViolationException.class)
+     public ResponseEntity<ErrorDetails> handleDataIntegrityViolationException(DataIntegrityViolationException ex) {
+         ErrorDetails errorDetails = this.prepareErrorDetails(ex);
+         return new ResponseEntity<>(errorDetails, HttpStatus.BAD_REQUEST);
+     }
 
     private ErrorDetails prepareErrorDetails(Exception exception){
         ErrorDetails errorDetails = new ErrorDetails();
