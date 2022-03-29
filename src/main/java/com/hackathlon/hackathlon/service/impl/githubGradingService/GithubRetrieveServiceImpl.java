@@ -8,6 +8,7 @@ import org.springframework.http.*;
 import org.springframework.stereotype.*;
 import org.springframework.web.reactive.function.client.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -29,8 +30,12 @@ public class GithubRetrieveServiceImpl implements GithubRetrieveService {
 
     @Override
     public List<GithubRepoDto> getByUrl(String url) {
-        String name = getNameFromUrl(url);
-        return get(name);
+        try {
+            String name = getNameFromUrl(url);
+            return get(name);
+        } catch (Exception e) {
+            return new ArrayList<>();
+        }
     }
 
     private String getNameFromUrl(String url) {
