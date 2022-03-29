@@ -24,10 +24,10 @@ public class WeekServiceImpl implements WeekService {
     public Week create(Long eventId,
                        Long userId,
                        Integer weekNo,
-                       WeekReportRequestDto dto) throws NoSuchElementException, IllegalArgumentException {
+                       WeekReportRequestDto dto) {
 
-        Event event = getEventIfExists(eventId);
-        User user = getUserIfExists(userId);
+        Event event = eventRepository.findById(eventId).orElseThrow(() -> new NoSuchElementException("Event with id " + eventId + " not found"));
+        User user = userRepository.findById(userId).orElseThrow(() -> new NoSuchElementException("User with id " + userId + " not found"));
         validateWeekNo(weekNo, event);
 
         Week week = weekMapper.toEntity(dto);
@@ -37,25 +37,9 @@ public class WeekServiceImpl implements WeekService {
         return savedWeek;
     }
 
-    private void validateWeekNo(Integer weekNo, Event event) throws IllegalArgumentException {
+    private void validateWeekNo(Integer weekNo, Event event) {
         if (weekNo > event.getWeeks()) {
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException("Week number " + weekNo + " is greater than event's weeks " + event.getWeeks());
         }
-    }
-
-    private Event getEventIfExists(Long eventId) throws NoSuchElementException {
-        Optional<Event> event = eventRepository.findById(eventId);
-        if (event.isEmpty()) {
-            throw new NoSuchElementException();
-        }
-        return event.get();
-    }
-
-    private User getUserIfExists(Long userId) throws NoSuchElementException {
-        Optional<User> user = userRepository.findById(userId);
-        if (user.isEmpty()) {
-            throw new NoSuchElementException();
-        }
-        return user.get();
     }
 }

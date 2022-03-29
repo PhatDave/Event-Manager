@@ -6,4 +6,5 @@ import org.springframework.data.jpa.repository.*;
 public interface EventRepository extends JpaRepository<Event, Long> {
     Event findByTeamsID(Long teamId);
     Event findByRegistrationsID(Long registrationID);
+    Boolean existsByName(String name);
 }

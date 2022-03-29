@@ -12,6 +12,7 @@ import com.hackathlon.hackathlon.mapper.eventMappers.detailedParticipant.*;
 import com.hackathlon.hackathlon.repository.*;
 import com.hackathlon.hackathlon.service.*;
 import lombok.*;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.data.domain.*;
 import org.springframework.stereotype.*;
 
@@ -36,12 +37,13 @@ public class EventServiceImpl implements EventService {
     }
 
     @Override
-    public Optional<Event> getById(Long id) {
-        return this.eventRepository.findById(id);
+    public Event getById(Long id) {
+        return this.eventRepository.findById(id).orElseThrow(() -> new NoSuchElementException("Event with id " + id + " not found"));
     }
 
     @Override
     public Event create(EventRequestDto dto) {
+        throwIfExists(dto);
         Event event = eventMapper.toEntity(dto);
         event.setStatus(EventStatusEnum.NOT_INVITED);
         Event savedEvent = eventRepository.save(event);
@@ -49,15 +51,14 @@ public class EventServiceImpl implements EventService {
     }
 
     @Override
-    public ParticipantsResponseDto inviteParticipants(Long eventId) throws NoSuchElementException, IllegalArgumentException {
-        Optional<Event> event = eventRepository.findById(eventId);
-        Event eventObj = getEventIfExists(event);
-        checkEventStatus(eventObj);
-        setEventStatus(eventObj);
+    public ParticipantsResponseDto inviteParticipants(Long eventId) {
+        Event event = eventRepository.findById(eventId).orElseThrow(() -> new NoSuchElementException("Event with id " + eventId + " not found"));
+        checkEventStatus(event);
+        setEventStatus(event);
 
         List<Registration> registrations = registrationRepository.findAllByEventID(eventId);
         sortRegistrationsByScore(registrations);
-        registrations = getMaxRegistrations(eventObj, registrations);
+        registrations = getMaxRegistrations(event, registrations);
         setRegistrationsStatus(registrations);
 
         List<ParticipantResponseDto> participants = registrations.stream().map(participantMapper::toDto).collect(Collectors.toList());
@@ -66,8 +67,8 @@ public class EventServiceImpl implements EventService {
     }
 
     @Override
-    public TeamsResponseDto teamUp(Long eventId) throws NoSuchElementException, AssertionError {
-        Event event = getEventIfExists(eventId);
+    public TeamsResponseDto teamUp(Long eventId) {
+        Event event = eventRepository.findById(eventId).orElseThrow(() -> new NoSuchElementException("Event with id " + eventId + " not found"));
         List<Team> teams = event.getTeams();
         List<Registration> registrations = event.getRegistrations();
 
@@ -84,8 +85,7 @@ public class EventServiceImpl implements EventService {
 
     @Override
     public List<DetailedParticipantDto> getDetailedParticipants(Long eventId, Pageable pageable) {
-//        TODO: get pageable registrations?
-        var registrations = registrationRepository.findAllByEventID(eventId, pageable);
+        Page<Registration> registrations = registrationRepository.findAllByEventID(eventId, pageable);
         return detailedParticipantDtoMapper.toDto(registrations);
     }
 
@@ -100,10 +100,16 @@ public class EventServiceImpl implements EventService {
         }
     }
 
-    private void validateUsersHaveNoTeam(List<User> users) throws AssertionError {
+    private void throwIfExists(EventRequestDto dto) {
+        if (this.eventRepository.existsByName(dto.getName())) {
+            throw new DataIntegrityViolationException("Event with name " + dto.getName() + " already exists");
+        }
+    }
+
+    private void validateUsersHaveNoTeam(List<User> users) {
         for (User user : users) {
             if (user.getTeam() != null) {
-                throw new AssertionError();
+                throw new IllegalStateException("User " + user.getBasicInfo().getFirstName() + " " + user.getBasicInfo().getLastName() + " already has a team");
             }
         }
     }
@@ -132,14 +138,6 @@ public class EventServiceImpl implements EventService {
         return filteredRegistrations;
     }
 
-    private Event getEventIfExists(Long eventId) throws NoSuchElementException {
-        Optional<Event> event = eventRepository.findById(eventId);
-        if (event.isEmpty()) {
-            throw new NoSuchElementException();
-        }
-        return event.get();
-    }
-
     private void setEventStatus(Event eventObj) {
         eventObj.setStatus(EventStatusEnum.INVITED);
         eventRepository.save(eventObj);
@@ -152,18 +150,10 @@ public class EventServiceImpl implements EventService {
         }
     }
 
-    private void checkEventStatus(Event eventObj) throws IllegalArgumentException {
-        if (eventObj.getStatus() == EventStatusEnum.INVITED) {
-            throw new IllegalArgumentException();
+    private void checkEventStatus(Event event) {
+        if (event.getStatus() == EventStatusEnum.INVITED) {
+            throw new IllegalStateException("Participants have already been invited to event " + event.getName());
         }
-    }
-
-    private Event getEventIfExists(Optional<Event> event) throws NoSuchElementException {
-        if (event.isEmpty()) {
-            throw new NoSuchElementException();
-        }
-        Event eventObj = event.get();
-        return eventObj;
     }
 
     private void sortRegistrationsByScore(List<Registration> registrations) {

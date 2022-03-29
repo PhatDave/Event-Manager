@@ -10,8 +10,10 @@ import java.util.*;
 public interface RegistrationService {
     List<Registration> getAll();
     RegistrationResponseDto getRegistrationDtoByUUID(String UUID);
-    Optional<Registration> getById(Long id);
-    Optional<Registration> getByUUID(String UUID);
+    Registration getById(Long id);
+    Registration getByUUID(String UUID);
+    void deleteByUUID(String UUID);
+    Registration createRegistration(RegistrationRequestDto registrationRequestDto, Event event);
 
     void delete(Registration registration);
     Registration create(Long eventID, RegistrationRequestDto registrationRequestDto);
