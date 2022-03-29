@@ -15,8 +15,8 @@ import org.springframework.web.bind.annotation.*;
 import java.net.*;
 import java.util.Optional;
 
-//TODO: send emails
-//TODO: get github api thing
+// todo automatic github grading?
+// todo send email on accept invite and other garbage
 
 @RestController
 @RequestMapping("/event/{eventID}/registrations")
@@ -27,6 +27,7 @@ public class RegistrationController {
     private final UserService userService;
     private final CommentService commentService;
     private final GithubGradingService githubGradingService;
+    private final EmailSender emailSender;
 
     @PostMapping
     private ResponseEntity<?> createRegistration(@PathVariable Long eventID, @RequestBody RegistrationRequestDto registrationRequestDto) {
@@ -49,8 +50,11 @@ public class RegistrationController {
 
     @GetMapping("")
     private ResponseEntity<Page<RegistrationResponseDto>> getRegistrations(@PathVariable Long eventID, Pageable pageable) {
-        User user = userService.getById(253L);
-        githubGradingService.grade(user);
+//        User user = userService.getById(253L);
+//        githubGradingService.grade(user);
+
+//        emailSender.sendEmail("david.majdandzic@hotmail.com", "test", "test");
+
         return ResponseEntity.ok(registrationService.getAllbyEventId(eventID, pageable));
     }
 

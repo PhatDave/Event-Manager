@@ -84,6 +84,7 @@ public class RegistrationServiceImpl implements RegistrationService {
     public void calculateScore(Registration registration) {
         Integer score = 0;
 
+        // todo test this thing
         User user = registration.getUser();
         Education education = user.getEducation();
         Experience experience = user.getExperience();
