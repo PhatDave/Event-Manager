@@ -7,6 +7,8 @@ import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
 
+import java.util.concurrent.CompletableFuture;
+
 @RequiredArgsConstructor
 @Service
 public class EmailSenderImpl implements EmailSender {
@@ -24,7 +26,6 @@ public class EmailSenderImpl implements EmailSender {
         simpleMailMessage.setSubject(subject);
         simpleMailMessage.setText(body);
 
-        Thread mailThread = new Thread(() -> javaMailSender.send(simpleMailMessage));
-        mailThread.start();
+        CompletableFuture.runAsync(() -> javaMailSender.send(simpleMailMessage));
     }
 }
