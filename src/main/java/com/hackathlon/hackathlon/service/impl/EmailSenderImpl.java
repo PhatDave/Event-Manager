@@ -24,6 +24,7 @@ public class EmailSenderImpl implements EmailSender {
         simpleMailMessage.setSubject(subject);
         simpleMailMessage.setText(body);
 
-        javaMailSender.send(simpleMailMessage);
+        Thread mailThread = new Thread(() -> javaMailSender.send(simpleMailMessage));
+        mailThread.start();
     }
 }
