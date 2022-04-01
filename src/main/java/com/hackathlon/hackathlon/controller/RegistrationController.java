@@ -66,6 +66,7 @@ public class RegistrationController {
     @PutMapping("/{registrationUUID}/score")
     private ResponseEntity<?> manuallyScoreRegistrationByUUID(@PathVariable Long eventID, @PathVariable String registrationUUID, @RequestBody CommentRequestDto commentRequestDto) {
         Event event = eventService.getById(eventID);
+        // todo malformed score returns 404, do validation
         Registration registration = registrationService.getByUUID(registrationUUID);
         commentService.create(registration.getID(), commentRequestDto);
 

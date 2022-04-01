@@ -14,6 +14,7 @@ import com.hackathlon.hackathlon.enums.SkillsEnum;
 import com.hackathlon.hackathlon.mapper.registrationMappers.RegistrationMapper;
 import com.hackathlon.hackathlon.repository.EventRepository;
 import com.hackathlon.hackathlon.repository.RegistrationRepository;
+import com.hackathlon.hackathlon.service.EmailSender;
 import com.hackathlon.hackathlon.service.RegistrationService;
 import com.hackathlon.hackathlon.service.impl.githubGradingService.GithubGradingService;
 import lombok.RequiredArgsConstructor;
@@ -30,6 +31,7 @@ public class RegistrationServiceImpl implements RegistrationService {
     private final RegistrationMapper registrationMapper;
     private final EventRepository eventRepository;
     private final GithubGradingService githubGradingService;
+    private final EmailSender emailSender;
 
     @Override
     public List<Registration> getAll() {
@@ -64,6 +66,7 @@ public class RegistrationServiceImpl implements RegistrationService {
         if (event.getRegistrationsNotAfter().after(today)) {
             throw new IllegalStateException("Registration is not allowed after " + event.getRegistrationsNotAfter());
         }
+        emailSender.sendEmail(registrationRequestDto.getPersonal().getEmail(), "Registration", "You have successfully registered for " + event.getName());
         Registration registration = this.create(event.getID(), registrationRequestDto);
         return registration;
     }
@@ -90,7 +93,6 @@ public class RegistrationServiceImpl implements RegistrationService {
     public void calculateScore(Registration registration) {
         Integer score = 0;
 
-        // todo test this thing
         User user = registration.getUser();
         Education education = user.getEducation();
         Experience experience = user.getExperience();
@@ -125,6 +127,7 @@ public class RegistrationServiceImpl implements RegistrationService {
         validateRegistration(registration);
 
         registrationMapper.merge(invitationRequestDto, registration);
+        emailSender.sendEmail(registration.getUser().getBasicInfo().getEmail(), "Invitation", "You have been invited to " + registration.getEvent().getName());
         registration.setStatus(RegistrationStatusEnum.ACCEPTED);
         registrationRepository.save(registration);
     }

@@ -22,6 +22,7 @@ import java.net.URI;
 public class EventController {
     private final EventService eventService;
     private final WeekService weekService;
+    // todo implement SBSS13_2 ?
 
     @PostMapping
     private ResponseEntity<?> create(@RequestBody EventRequestDto eventRequestDto) {

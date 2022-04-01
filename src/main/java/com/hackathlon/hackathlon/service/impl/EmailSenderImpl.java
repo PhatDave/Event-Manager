@@ -16,13 +16,13 @@ public class EmailSenderImpl implements EmailSender {
     private final JavaMailSender javaMailSender;
 
     @Override
-    public void sendEmail(String to, String text, String subject) {
+    public void sendEmail(String to, String subject, String body) {
         SimpleMailMessage simpleMailMessage = new SimpleMailMessage();
         simpleMailMessage.setFrom(fromEmail);
         simpleMailMessage.setTo(to);
 //        simpleMailMessage.setCc(ccEmail);
         simpleMailMessage.setSubject(subject);
-        simpleMailMessage.setText(text);
+        simpleMailMessage.setText(body);
 
         javaMailSender.send(simpleMailMessage);
     }

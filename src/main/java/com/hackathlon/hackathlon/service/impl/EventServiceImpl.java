@@ -20,6 +20,7 @@ import com.hackathlon.hackathlon.mapper.eventMappers.detailedParticipant.Detaile
 import com.hackathlon.hackathlon.repository.EventRepository;
 import com.hackathlon.hackathlon.repository.RegistrationRepository;
 import com.hackathlon.hackathlon.repository.TeamRepository;
+import com.hackathlon.hackathlon.service.EmailSender;
 import com.hackathlon.hackathlon.service.EventService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.dao.DataIntegrityViolationException;
@@ -36,6 +37,7 @@ public class EventServiceImpl implements EventService {
     private final EventRepository eventRepository;
     private final RegistrationRepository registrationRepository;
     private final TeamRepository teamRepository;
+    private final EmailSender emailSender;
 
     private final EventMapper eventMapper;
     private final ParticipantMapper participantMapper;
@@ -156,6 +158,7 @@ public class EventServiceImpl implements EventService {
 
     private void setRegistrationsStatus(List<Registration> registrations) {
         for (Registration reg : registrations) {
+            emailSender.sendEmail(reg.getUser().getBasicInfo().getEmail(), "Event invitation", "You have been invited to " + reg.getEvent().getName());
             reg.setStatus(RegistrationStatusEnum.INVITED);
             registrationRepository.save(reg);
         }
