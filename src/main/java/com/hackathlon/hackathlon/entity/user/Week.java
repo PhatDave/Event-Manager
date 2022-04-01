@@ -1,7 +1,10 @@
 package com.hackathlon.hackathlon.entity.user;
 
-import com.hackathlon.hackathlon.entity.enums.*;
-import lombok.*;
+import com.hackathlon.hackathlon.entity.enums.WeekStatus;
+import lombok.AccessLevel;
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.*;
 

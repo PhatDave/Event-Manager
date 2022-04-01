@@ -1,10 +1,11 @@
 package com.hackathlon.hackathlon;
 
-import com.hackathlon.hackathlon.entity.*;
-import com.hackathlon.hackathlon.entity.user.*;
-import com.hackathlon.hackathlon.repository.*;
+import com.hackathlon.hackathlon.entity.Team;
+import com.hackathlon.hackathlon.entity.user.User;
+import com.hackathlon.hackathlon.repository.TeamRepository;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class PartitionedTeams {
     private ArrayList<PTeam> pTeams;

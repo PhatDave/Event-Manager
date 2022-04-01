@@ -1,8 +1,10 @@
 package com.hackathlon.hackathlon.mapper.eventMappers.detailedParticipant;
 
-import com.hackathlon.hackathlon.dto.responses.eventDtos.detailedParticipant.*;
-import com.hackathlon.hackathlon.entity.*;
-import org.mapstruct.*;
+import com.hackathlon.hackathlon.dto.responses.eventDtos.detailedParticipant.UserRegistrationInfoDto;
+import com.hackathlon.hackathlon.entity.Registration;
+import org.mapstruct.Builder;
+import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
 
 @Mapper(
         builder = @Builder(disableBuilder = true)

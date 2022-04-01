@@ -1,14 +1,18 @@
 package com.hackathlon.hackathlon.service.impl;
 
-import com.hackathlon.hackathlon.dto.requests.registrationDtos.*;
-import com.hackathlon.hackathlon.entity.*;
-import com.hackathlon.hackathlon.mapper.registrationMappers.*;
-import com.hackathlon.hackathlon.repository.*;
-import com.hackathlon.hackathlon.service.*;
-import lombok.*;
-import org.springframework.stereotype.*;
+import com.hackathlon.hackathlon.dto.requests.registrationDtos.CommentRequestDto;
+import com.hackathlon.hackathlon.entity.Comment;
+import com.hackathlon.hackathlon.entity.Registration;
+import com.hackathlon.hackathlon.mapper.registrationMappers.CommentMapper;
+import com.hackathlon.hackathlon.repository.CommentRepository;
+import com.hackathlon.hackathlon.repository.RegistrationRepository;
+import com.hackathlon.hackathlon.service.CommentService;
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Service;
 
-import java.util.*;
+import java.util.List;
+import java.util.NoSuchElementException;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor

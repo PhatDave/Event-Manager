@@ -1,11 +1,11 @@
 package com.hackathlon.hackathlon.mapper.registrationMappers;
 
-import com.hackathlon.hackathlon.dto.requests.registrationDtos.*;
-import com.hackathlon.hackathlon.dto.responses.registrationDtos.*;
-import com.hackathlon.hackathlon.entity.*;
-import com.hackathlon.hackathlon.enums.RegistrationStatusEnum;
+import com.hackathlon.hackathlon.dto.requests.registrationDtos.InvitationRequestDto;
+import com.hackathlon.hackathlon.dto.requests.registrationDtos.RegistrationRequestDto;
+import com.hackathlon.hackathlon.dto.responses.registrationDtos.RegistrationResponseDto;
+import com.hackathlon.hackathlon.entity.Registration;
 import org.mapstruct.*;
-import org.springframework.beans.factory.annotation.*;
+import org.springframework.beans.factory.annotation.Autowired;
 
 @Mapper(
         uses = {

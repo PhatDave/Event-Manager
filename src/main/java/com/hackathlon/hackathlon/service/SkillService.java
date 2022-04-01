@@ -1,9 +1,10 @@
 package com.hackathlon.hackathlon.service;
 
-import com.hackathlon.hackathlon.dto.requests.registrationDtos.*;
-import com.hackathlon.hackathlon.entity.user.*;
+import com.hackathlon.hackathlon.dto.requests.registrationDtos.SkillRequestDto;
+import com.hackathlon.hackathlon.entity.user.Skill;
 
-import java.util.*;
+import java.util.List;
+import java.util.Optional;
 
 public interface SkillService {
     List<Skill> getAll();

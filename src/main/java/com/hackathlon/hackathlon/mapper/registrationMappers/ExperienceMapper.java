@@ -1,8 +1,8 @@
 package com.hackathlon.hackathlon.mapper.registrationMappers;
 
-import com.hackathlon.hackathlon.dto.requests.registrationDtos.*;
-import com.hackathlon.hackathlon.dto.responses.registrationDtos.*;
-import com.hackathlon.hackathlon.entity.user.*;
+import com.hackathlon.hackathlon.dto.requests.registrationDtos.ExperienceRequestDto;
+import com.hackathlon.hackathlon.dto.responses.registrationDtos.ExperienceResponseDto;
+import com.hackathlon.hackathlon.entity.user.Experience;
 import org.mapstruct.*;
 
 @Mapper(

@@ -1,12 +1,13 @@
 package com.hackathlon.hackathlon.service.impl;
 
-import com.hackathlon.hackathlon.entity.user.*;
-import com.hackathlon.hackathlon.repository.*;
-import com.hackathlon.hackathlon.service.*;
-import lombok.*;
-import org.springframework.stereotype.*;
+import com.hackathlon.hackathlon.entity.user.Education;
+import com.hackathlon.hackathlon.repository.EducationRepository;
+import com.hackathlon.hackathlon.service.EducationService;
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Service;
 
-import java.util.*;
+import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor

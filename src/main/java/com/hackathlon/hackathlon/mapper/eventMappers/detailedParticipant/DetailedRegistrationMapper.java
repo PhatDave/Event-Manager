@@ -1,9 +1,13 @@
 package com.hackathlon.hackathlon.mapper.eventMappers.detailedParticipant;
 
-import com.hackathlon.hackathlon.dto.responses.registrationDtos.*;
-import com.hackathlon.hackathlon.entity.*;
-import com.hackathlon.hackathlon.mapper.registrationMappers.*;
-import org.mapstruct.*;
+import com.hackathlon.hackathlon.dto.responses.registrationDtos.RegistrationResponseDto;
+import com.hackathlon.hackathlon.entity.Registration;
+import com.hackathlon.hackathlon.mapper.registrationMappers.CommentMapper;
+import com.hackathlon.hackathlon.mapper.registrationMappers.ExperienceMapper;
+import com.hackathlon.hackathlon.mapper.registrationMappers.PersonalMapper;
+import org.mapstruct.Builder;
+import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
 
 @Mapper(
         uses = {

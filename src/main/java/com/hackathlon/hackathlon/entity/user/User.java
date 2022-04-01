@@ -1,10 +1,14 @@
 package com.hackathlon.hackathlon.entity.user;
 
-import com.hackathlon.hackathlon.entity.*;
-import lombok.*;
+import com.hackathlon.hackathlon.entity.Registration;
+import com.hackathlon.hackathlon.entity.Team;
+import lombok.AccessLevel;
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.*;
-import java.util.*;
+import java.util.List;
 
 @Getter
 @Setter

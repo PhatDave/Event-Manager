@@ -1,12 +1,15 @@
 package com.hackathlon.hackathlon.mapper.eventMappers;
 
-import com.hackathlon.hackathlon.dto.requests.eventDtos.*;
-import com.hackathlon.hackathlon.dto.responses.eventDtos.*;
-import com.hackathlon.hackathlon.entity.*;
-import org.apache.commons.collections4.*;
-import org.mapstruct.*;
+import com.hackathlon.hackathlon.dto.requests.eventDtos.TeamRequestDto;
+import com.hackathlon.hackathlon.dto.responses.eventDtos.TeamResponseDto;
+import com.hackathlon.hackathlon.entity.Team;
+import org.apache.commons.collections4.CollectionUtils;
+import org.mapstruct.AfterMapping;
+import org.mapstruct.Builder;
+import org.mapstruct.Mapper;
+import org.mapstruct.MappingTarget;
 
-import java.util.stream.*;
+import java.util.stream.Collectors;
 
 @Mapper(
         uses = {

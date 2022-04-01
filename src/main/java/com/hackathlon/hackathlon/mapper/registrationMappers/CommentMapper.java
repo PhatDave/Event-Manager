@@ -1,8 +1,8 @@
 package com.hackathlon.hackathlon.mapper.registrationMappers;
 
-import com.hackathlon.hackathlon.dto.requests.registrationDtos.*;
-import com.hackathlon.hackathlon.dto.responses.registrationDtos.*;
-import com.hackathlon.hackathlon.entity.*;
+import com.hackathlon.hackathlon.dto.requests.registrationDtos.CommentRequestDto;
+import com.hackathlon.hackathlon.dto.responses.registrationDtos.CommentResponseDto;
+import com.hackathlon.hackathlon.entity.Comment;
 import org.mapstruct.*;
 
 @Mapper(builder = @Builder(disableBuilder=true))

@@ -1,12 +1,15 @@
 package com.hackathlon.hackathlon.entity;
 
 
-import com.hackathlon.hackathlon.entity.user.*;
-import com.hackathlon.hackathlon.enums.*;
-import lombok.*;
+import com.hackathlon.hackathlon.entity.user.User;
+import com.hackathlon.hackathlon.enums.RegistrationStatusEnum;
+import lombok.AccessLevel;
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.*;
-import java.util.*;
+import java.util.List;
 
 @Getter
 @Setter

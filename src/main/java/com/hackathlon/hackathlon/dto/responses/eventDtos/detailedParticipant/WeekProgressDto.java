@@ -1,8 +1,11 @@
 package com.hackathlon.hackathlon.dto.responses.eventDtos.detailedParticipant;
 
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
-import java.util.*;
+import java.util.List;
 
 @Getter
 @Setter

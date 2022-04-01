@@ -1,19 +1,20 @@
 package com.hackathlon.hackathlon.controller;
 
-import com.hackathlon.hackathlon.dto.requests.eventDtos.*;
-import com.hackathlon.hackathlon.dto.responses.eventDtos.*;
-import com.hackathlon.hackathlon.dto.responses.eventDtos.detailedParticipant.*;
-import com.hackathlon.hackathlon.entity.*;
-import com.hackathlon.hackathlon.service.*;
-import lombok.*;
-import org.springframework.dao.*;
-import org.springframework.data.domain.*;
-import org.springframework.http.*;
-import org.springframework.scheduling.annotation.*;
+import com.hackathlon.hackathlon.dto.requests.eventDtos.EventRequestDto;
+import com.hackathlon.hackathlon.dto.requests.eventDtos.WeekReportRequestDto;
+import com.hackathlon.hackathlon.dto.responses.eventDtos.ParticipantsResponseDto;
+import com.hackathlon.hackathlon.dto.responses.eventDtos.TeamsResponseDto;
+import com.hackathlon.hackathlon.dto.responses.eventDtos.detailedParticipant.DetailedParticipantsDto;
+import com.hackathlon.hackathlon.entity.Event;
+import com.hackathlon.hackathlon.service.EventService;
+import com.hackathlon.hackathlon.service.WeekService;
+import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Pageable;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.net.*;
-import java.util.*;
+import java.net.URI;
 
 @RestController
 @RequestMapping("/event")

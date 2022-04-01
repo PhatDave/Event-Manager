@@ -1,9 +1,9 @@
 package com.hackathlon.hackathlon.repository;
 
-import com.hackathlon.hackathlon.entity.*;
-import org.springframework.data.jpa.repository.*;
+import com.hackathlon.hackathlon.entity.Team;
+import org.springframework.data.jpa.repository.JpaRepository;
 
-import java.util.*;
+import java.util.List;
 
 public interface TeamRepository extends JpaRepository<Team, Long> {
     Team findByUsersID(Long userId);

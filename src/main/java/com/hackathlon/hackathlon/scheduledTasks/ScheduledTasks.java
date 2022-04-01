@@ -1,11 +1,9 @@
 package com.hackathlon.hackathlon.scheduledTasks;
 
-import com.hackathlon.hackathlon.service.*;
-import lombok.*;
-import org.springframework.scheduling.annotation.*;
-import org.springframework.stereotype.*;
-
-import java.util.*;
+import com.hackathlon.hackathlon.service.EventService;
+import lombok.RequiredArgsConstructor;
+import org.springframework.scheduling.annotation.Scheduled;
+import org.springframework.stereotype.Component;
 
 @RequiredArgsConstructor
 @Component

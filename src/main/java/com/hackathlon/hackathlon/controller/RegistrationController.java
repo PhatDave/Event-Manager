@@ -1,22 +1,21 @@
 package com.hackathlon.hackathlon.controller;
 
-import com.hackathlon.hackathlon.dto.requests.registrationDtos.*;
-import com.hackathlon.hackathlon.dto.responses.registrationDtos.*;
-import com.hackathlon.hackathlon.entity.*;
-import com.hackathlon.hackathlon.entity.user.User;
+import com.hackathlon.hackathlon.dto.requests.registrationDtos.CommentRequestDto;
+import com.hackathlon.hackathlon.dto.requests.registrationDtos.InvitationRequestDto;
+import com.hackathlon.hackathlon.dto.requests.registrationDtos.RegistrationRequestDto;
+import com.hackathlon.hackathlon.dto.responses.registrationDtos.RegistrationResponseDto;
+import com.hackathlon.hackathlon.entity.Event;
+import com.hackathlon.hackathlon.entity.Registration;
 import com.hackathlon.hackathlon.service.*;
 import com.hackathlon.hackathlon.service.impl.githubGradingService.GithubGradingService;
-import com.hackathlon.hackathlon.service.impl.githubGradingService.GithubRetrieveService;
-import lombok.*;
-import org.springframework.data.domain.*;
-import org.springframework.http.*;
+import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.net.*;
-import java.util.Optional;
-
-// todo automatic github grading?
-// todo send email on accept invite and other garbage
+import java.net.URI;
 
 @RestController
 @RequestMapping("/event/{eventID}/registrations")

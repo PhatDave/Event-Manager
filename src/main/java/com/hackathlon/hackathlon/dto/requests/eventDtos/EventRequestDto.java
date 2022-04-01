@@ -1,8 +1,12 @@
 package com.hackathlon.hackathlon.dto.requests.eventDtos;
 
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
-import java.util.*;
+import java.util.Date;
+import java.util.List;
 
 @Getter
 @Setter

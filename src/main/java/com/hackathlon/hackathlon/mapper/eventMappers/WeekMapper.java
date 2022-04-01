@@ -1,9 +1,13 @@
 package com.hackathlon.hackathlon.mapper.eventMappers;
 
-import com.hackathlon.hackathlon.dto.requests.eventDtos.*;
-import com.hackathlon.hackathlon.dto.responses.eventDtos.detailedParticipant.*;
-import com.hackathlon.hackathlon.entity.user.*;
-import org.mapstruct.*;
+import com.hackathlon.hackathlon.dto.requests.eventDtos.WeekReportRequestDto;
+import com.hackathlon.hackathlon.dto.responses.eventDtos.detailedParticipant.WeekDto;
+import com.hackathlon.hackathlon.dto.responses.eventDtos.detailedParticipant.WeekProgressDto;
+import com.hackathlon.hackathlon.entity.user.User;
+import com.hackathlon.hackathlon.entity.user.Week;
+import org.mapstruct.Builder;
+import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
 
 @Mapper(
         builder = @Builder(disableBuilder = true)

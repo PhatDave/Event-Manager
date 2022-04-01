@@ -1,23 +1,34 @@
 package com.hackathlon.hackathlon.service.impl;
 
-import com.hackathlon.hackathlon.*;
-import com.hackathlon.hackathlon.dto.requests.eventDtos.*;
-import com.hackathlon.hackathlon.dto.responses.eventDtos.*;
-import com.hackathlon.hackathlon.dto.responses.eventDtos.detailedParticipant.*;
-import com.hackathlon.hackathlon.entity.*;
-import com.hackathlon.hackathlon.entity.user.*;
-import com.hackathlon.hackathlon.enums.*;
-import com.hackathlon.hackathlon.mapper.eventMappers.*;
-import com.hackathlon.hackathlon.mapper.eventMappers.detailedParticipant.*;
-import com.hackathlon.hackathlon.repository.*;
-import com.hackathlon.hackathlon.service.*;
-import lombok.*;
+import com.hackathlon.hackathlon.PartitionedTeams;
+import com.hackathlon.hackathlon.dto.requests.eventDtos.EventRequestDto;
+import com.hackathlon.hackathlon.dto.responses.eventDtos.ParticipantResponseDto;
+import com.hackathlon.hackathlon.dto.responses.eventDtos.ParticipantsResponseDto;
+import com.hackathlon.hackathlon.dto.responses.eventDtos.TeamResponseDto;
+import com.hackathlon.hackathlon.dto.responses.eventDtos.TeamsResponseDto;
+import com.hackathlon.hackathlon.dto.responses.eventDtos.detailedParticipant.DetailedParticipantDto;
+import com.hackathlon.hackathlon.entity.Event;
+import com.hackathlon.hackathlon.entity.Registration;
+import com.hackathlon.hackathlon.entity.Team;
+import com.hackathlon.hackathlon.entity.user.User;
+import com.hackathlon.hackathlon.enums.EventStatusEnum;
+import com.hackathlon.hackathlon.enums.RegistrationStatusEnum;
+import com.hackathlon.hackathlon.mapper.eventMappers.EventMapper;
+import com.hackathlon.hackathlon.mapper.eventMappers.ParticipantMapper;
+import com.hackathlon.hackathlon.mapper.eventMappers.TeamMapper;
+import com.hackathlon.hackathlon.mapper.eventMappers.detailedParticipant.DetailedParticipantDtoMapper;
+import com.hackathlon.hackathlon.repository.EventRepository;
+import com.hackathlon.hackathlon.repository.RegistrationRepository;
+import com.hackathlon.hackathlon.repository.TeamRepository;
+import com.hackathlon.hackathlon.service.EventService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.dao.DataIntegrityViolationException;
-import org.springframework.data.domain.*;
-import org.springframework.stereotype.*;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.stereotype.Service;
 
 import java.util.*;
-import java.util.stream.*;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor

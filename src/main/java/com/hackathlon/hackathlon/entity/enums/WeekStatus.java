@@ -1,6 +1,6 @@
 package com.hackathlon.hackathlon.entity.enums;
 
-import lombok.*;
+import lombok.Getter;
 
 @Getter
 public enum WeekStatus {

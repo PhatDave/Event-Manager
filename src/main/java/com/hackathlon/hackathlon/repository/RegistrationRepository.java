@@ -1,10 +1,12 @@
 package com.hackathlon.hackathlon.repository;
 
-import com.hackathlon.hackathlon.entity.*;
-import org.springframework.data.domain.*;
-import org.springframework.data.jpa.repository.*;
+import com.hackathlon.hackathlon.entity.Registration;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.repository.JpaRepository;
 
-import java.util.*;
+import java.util.List;
+import java.util.Optional;
 
 public interface RegistrationRepository extends JpaRepository<Registration, Long> {
     Optional<Registration> findByCommentsID(Long commentId);

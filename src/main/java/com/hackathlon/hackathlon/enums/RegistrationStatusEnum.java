@@ -1,6 +1,6 @@
 package com.hackathlon.hackathlon.enums;
 
-import lombok.*;
+import lombok.Getter;
 
 @Getter
 public enum RegistrationStatusEnum {

@@ -1,12 +1,14 @@
 package com.hackathlon.hackathlon.mapper.eventMappers.detailedParticipant;
 
-import com.hackathlon.hackathlon.dto.responses.eventDtos.detailedParticipant.*;
-import com.hackathlon.hackathlon.entity.*;
-import com.hackathlon.hackathlon.mapper.eventMappers.*;
-import org.mapstruct.*;
-import org.springframework.data.domain.*;
+import com.hackathlon.hackathlon.dto.responses.eventDtos.detailedParticipant.DetailedParticipantDto;
+import com.hackathlon.hackathlon.entity.Registration;
+import com.hackathlon.hackathlon.mapper.eventMappers.WeekMapper;
+import org.mapstruct.Builder;
+import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
+import org.springframework.data.domain.Page;
 
-import java.util.*;
+import java.util.List;
 
 @Mapper(
         uses = {

@@ -1,12 +1,13 @@
 package com.hackathlon.hackathlon.service;
 
-import com.hackathlon.hackathlon.dto.requests.eventDtos.*;
-import com.hackathlon.hackathlon.dto.responses.eventDtos.*;
-import com.hackathlon.hackathlon.dto.responses.eventDtos.detailedParticipant.*;
-import com.hackathlon.hackathlon.entity.*;
-import org.springframework.data.domain.*;
+import com.hackathlon.hackathlon.dto.requests.eventDtos.EventRequestDto;
+import com.hackathlon.hackathlon.dto.responses.eventDtos.ParticipantsResponseDto;
+import com.hackathlon.hackathlon.dto.responses.eventDtos.TeamsResponseDto;
+import com.hackathlon.hackathlon.dto.responses.eventDtos.detailedParticipant.DetailedParticipantDto;
+import com.hackathlon.hackathlon.entity.Event;
+import org.springframework.data.domain.Pageable;
 
-import java.util.*;
+import java.util.List;
 
 public interface EventService {
     List<Event> getAll();

@@ -1,15 +1,18 @@
 package com.hackathlon.hackathlon.service.impl;
 
-import com.hackathlon.hackathlon.dto.requests.eventDtos.*;
-import com.hackathlon.hackathlon.entity.*;
-import com.hackathlon.hackathlon.entity.user.*;
-import com.hackathlon.hackathlon.mapper.eventMappers.*;
-import com.hackathlon.hackathlon.repository.*;
-import com.hackathlon.hackathlon.service.*;
-import lombok.*;
-import org.springframework.stereotype.*;
+import com.hackathlon.hackathlon.dto.requests.eventDtos.WeekReportRequestDto;
+import com.hackathlon.hackathlon.entity.Event;
+import com.hackathlon.hackathlon.entity.user.User;
+import com.hackathlon.hackathlon.entity.user.Week;
+import com.hackathlon.hackathlon.mapper.eventMappers.WeekMapper;
+import com.hackathlon.hackathlon.repository.EventRepository;
+import com.hackathlon.hackathlon.repository.UserRepository;
+import com.hackathlon.hackathlon.repository.WeekRepository;
+import com.hackathlon.hackathlon.service.WeekService;
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Service;
 
-import java.util.*;
+import java.util.NoSuchElementException;
 
 @Service
 @RequiredArgsConstructor

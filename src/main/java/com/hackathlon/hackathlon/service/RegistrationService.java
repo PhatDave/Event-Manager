@@ -1,11 +1,14 @@
 package com.hackathlon.hackathlon.service;
 
-import com.hackathlon.hackathlon.dto.requests.registrationDtos.*;
-import com.hackathlon.hackathlon.dto.responses.registrationDtos.*;
-import com.hackathlon.hackathlon.entity.*;
-import org.springframework.data.domain.*;
+import com.hackathlon.hackathlon.dto.requests.registrationDtos.InvitationRequestDto;
+import com.hackathlon.hackathlon.dto.requests.registrationDtos.RegistrationRequestDto;
+import com.hackathlon.hackathlon.dto.responses.registrationDtos.RegistrationResponseDto;
+import com.hackathlon.hackathlon.entity.Event;
+import com.hackathlon.hackathlon.entity.Registration;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
-import java.util.*;
+import java.util.List;
 
 public interface RegistrationService {
     List<Registration> getAll();

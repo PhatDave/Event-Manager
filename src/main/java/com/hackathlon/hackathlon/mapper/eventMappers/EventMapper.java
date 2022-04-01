@@ -1,8 +1,11 @@
 package com.hackathlon.hackathlon.mapper.eventMappers;
 
-import com.hackathlon.hackathlon.dto.requests.eventDtos.*;
-import com.hackathlon.hackathlon.entity.*;
-import org.mapstruct.*;
+import com.hackathlon.hackathlon.dto.requests.eventDtos.EventRequestDto;
+import com.hackathlon.hackathlon.entity.Event;
+import org.mapstruct.AfterMapping;
+import org.mapstruct.Builder;
+import org.mapstruct.Mapper;
+import org.mapstruct.MappingTarget;
 
 @Mapper(
         uses = {

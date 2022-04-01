@@ -1,9 +1,10 @@
 package com.hackathlon.hackathlon.service;
 
-import com.hackathlon.hackathlon.dto.requests.registrationDtos.*;
-import com.hackathlon.hackathlon.entity.*;
+import com.hackathlon.hackathlon.dto.requests.registrationDtos.CommentRequestDto;
+import com.hackathlon.hackathlon.entity.Comment;
 
-import java.util.*;
+import java.util.List;
+import java.util.Optional;
 
 public interface CommentService {
     List<Comment> getAll();

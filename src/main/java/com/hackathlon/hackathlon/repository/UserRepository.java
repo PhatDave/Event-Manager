@@ -1,9 +1,9 @@
 package com.hackathlon.hackathlon.repository;
 
-import com.hackathlon.hackathlon.entity.user.*;
-import org.springframework.data.jpa.repository.*;
+import com.hackathlon.hackathlon.entity.user.User;
+import org.springframework.data.jpa.repository.JpaRepository;
 
-import java.util.*;
+import java.util.List;
 
 public interface UserRepository extends JpaRepository<User, Long> {
     User findByEducationID(Long educationId);

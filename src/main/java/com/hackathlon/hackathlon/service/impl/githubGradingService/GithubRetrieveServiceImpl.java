@@ -1,12 +1,12 @@
 package com.hackathlon.hackathlon.service.impl.githubGradingService;
 
 
-import com.hackathlon.hackathlon.dto.githubRelatedDtos.*;
-import org.springframework.beans.factory.annotation.*;
+import com.hackathlon.hackathlon.dto.githubRelatedDtos.GithubRepoDto;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.ParameterizedTypeReference;
-import org.springframework.http.*;
-import org.springframework.stereotype.*;
-import org.springframework.web.reactive.function.client.*;
+import org.springframework.http.MediaType;
+import org.springframework.stereotype.Service;
+import org.springframework.web.reactive.function.client.WebClient;
 
 import java.util.ArrayList;
 import java.util.List;
