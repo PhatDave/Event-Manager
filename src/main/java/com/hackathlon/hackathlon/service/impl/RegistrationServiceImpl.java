@@ -12,9 +12,9 @@ import com.hackathlon.hackathlon.entity.user.User;
 import com.hackathlon.hackathlon.enums.RegistrationStatusEnum;
 import com.hackathlon.hackathlon.enums.SkillsEnum;
 import com.hackathlon.hackathlon.mapper.registrationMappers.RegistrationMapper;
-import com.hackathlon.hackathlon.repository.EventRepository;
 import com.hackathlon.hackathlon.repository.RegistrationRepository;
 import com.hackathlon.hackathlon.service.EmailSender;
+import com.hackathlon.hackathlon.service.EventService;
 import com.hackathlon.hackathlon.service.RegistrationService;
 import com.hackathlon.hackathlon.service.impl.githubGradingService.GithubGradingService;
 import lombok.RequiredArgsConstructor;
@@ -29,7 +29,7 @@ import java.util.*;
 public class RegistrationServiceImpl implements RegistrationService {
     private final RegistrationRepository registrationRepository;
     private final RegistrationMapper registrationMapper;
-    private final EventRepository eventRepository;
+    private final EventService eventService;
     private final GithubGradingService githubGradingService;
     private final EmailSender emailSender;
 
@@ -80,7 +80,7 @@ public class RegistrationServiceImpl implements RegistrationService {
     @Override
     public Registration create(Long eventID, RegistrationRequestDto dto) {
         Registration reg = registrationMapper.toEntity(dto);
-        reg.setEvent(eventRepository.getById(eventID));
+        reg.setEvent(eventService.getById(eventID));
         reg.setUUID(UUID.randomUUID().toString());
         reg.setStatus(RegistrationStatusEnum.NOT_INVITED);
         calculateScore(reg);

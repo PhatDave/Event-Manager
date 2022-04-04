@@ -6,12 +6,13 @@ import com.hackathlon.hackathlon.dto.requests.registrationDtos.RegistrationReque
 import com.hackathlon.hackathlon.entity.Event;
 import com.hackathlon.hackathlon.entity.Team;
 import com.hackathlon.hackathlon.repository.EventRepository;
-import org.junit.Test;
-import org.junit.jupiter.api.BeforeAll;
-import org.mockito.Mock;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.web.servlet.MockMvc;
@@ -32,11 +33,11 @@ public class RegistrationControllerTest {
     @Autowired
     private MockMvc mockMvc;
 
-    @Mock
-    private static EventRepository eventRepository;
+    @MockBean
+    private EventRepository eventRepository;
 
-    @BeforeAll
-    static void setUp() {
+    @BeforeEach
+    void setUp() {
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(new Date());
         calendar.add(Calendar.DATE, -3);
@@ -44,18 +45,24 @@ public class RegistrationControllerTest {
         ArrayList<Event> events = new ArrayList<>();
 
         Event event1 = new Event();
+        event1.setID(1L);
         event1.setName("Event1");
         event1.setTeams((List) new ArrayList<Team>());
+        event1.setRegistrations((List) new ArrayList<>());
         event1.setRegistrationsNotAfter(new Date());
         events.add(event1);
 
         Event event2 = new Event();
-        event1.setName("Event2");
-        event1.setTeams((List) new ArrayList<Team>());
-        event1.setRegistrationsNotAfter(calendar.getTime());
+        event1.setID(2L);
+        event2.setName("Event2");
+        event2.setTeams((List) new ArrayList<Team>());
+        event2.setRegistrations((List) new ArrayList<>());
+        event2.setRegistrationsNotAfter(calendar.getTime());
         events.add(event2);
 
-        eventRepository.saveAll(events);
+        Mockito.when(eventRepository.findAll()).thenReturn(events);
+        Mockito.when(eventRepository.findById(1L)).thenReturn(java.util.Optional.of(event1));
+        Mockito.when(eventRepository.findById(2L)).thenReturn(java.util.Optional.of(event2));
     }
 
     @Test
@@ -71,9 +78,14 @@ public class RegistrationControllerTest {
                         .content(json))
                 .andExpect(status().isCreated());
 
+        mockMvc.perform(post("/event/2/registrations")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(json))
+                .andExpect(status().isMethodNotAllowed());
+
         mockMvc.perform(post("/event/123123/registrations")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(json))
-                .andExpect(status().isBadRequest());
+                .andExpect(status().isNotFound());
     }
 }
