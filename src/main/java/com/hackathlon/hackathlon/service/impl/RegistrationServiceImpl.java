@@ -73,10 +73,10 @@ public class RegistrationServiceImpl implements RegistrationService {
 
     @Override
     public void delete(Registration registration) {
-        if (!this.registrationRepository.existsById(registration.getID())) {
+        if (!registrationRepository.existsById(registration.getID())) {
             throw new NoSuchElementException("Registration with id " + registration.getID() + " not found");
         }
-        this.registrationRepository.deleteById(registration.getID());
+        registrationRepository.deleteById(registration.getID());
 //        this.registrationRepository.delete(registration);
     }
 

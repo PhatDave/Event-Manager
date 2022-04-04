@@ -25,7 +25,9 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.header;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @SpringBootTest
@@ -74,6 +76,13 @@ public class RegistrationControllerTest {
 
         Mockito.when(eventRepository.save(Mockito.any(Event.class))).thenAnswer(i -> i.getArguments()[0]);
         Mockito.when(registrationRepository.save(Mockito.any(Registration.class))).thenAnswer(i -> i.getArguments()[0]);
+
+        Registration registration = new Registration();
+        registration.setID(1L);
+        registration.setEvent(event1);
+        registration.setUUID("uuid");
+
+        Mockito.when(registrationRepository.findByUUID("uuid")).thenReturn(java.util.Optional.of(registration));
     }
 
     @Test
@@ -84,10 +93,12 @@ public class RegistrationControllerTest {
         ObjectWriter ow = objectMapper.writer().withDefaultPrettyPrinter();
         String json = ow.writeValueAsString(registrationRequestDto);
 
+        // todo get uuid how?
         mockMvc.perform(post("/event/1/registrations")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(json))
-                .andExpect(status().isCreated());
+                .andExpect(status().isCreated())
+                .andExpect(header().string("Location", "/event/1/registrations/1"));
 
         mockMvc.perform(post("/event/2/registrations")
                         .contentType(MediaType.APPLICATION_JSON)
@@ -97,6 +108,18 @@ public class RegistrationControllerTest {
         mockMvc.perform(post("/event/123123/registrations")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(json))
+                .andExpect(status().isNotFound());
+    }
+
+    @Test
+    public void deleteRegistration() throws Exception {
+        mockMvc.perform(delete("/event/1/registrations/uuid"))
+                .andExpect(status().isOk());
+
+        mockMvc.perform(delete("/event/1/registrations/uuid"))
+                .andExpect(status().isNotFound());
+
+        mockMvc.perform(delete("/event/13/registrations/uuid"))
                 .andExpect(status().isNotFound());
     }
 }
