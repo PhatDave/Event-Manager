@@ -62,8 +62,8 @@ public class RegistrationServiceImpl implements RegistrationService {
 
     @Override
     public Registration createRegistration(RegistrationRequestDto registrationRequestDto, Event event) {
-        Date today = Calendar.getInstance().getTime();
-        if (event.getRegistrationsNotAfter().after(today)) {
+        Date today = new Date();
+        if (event.getRegistrationsNotAfter().before(today)) {
             throw new IllegalStateException("Registration is not allowed after " + event.getRegistrationsNotAfter());
         }
         emailSender.sendEmail(registrationRequestDto.getPersonal().getEmail(), "Registration", "You have successfully registered for " + event.getName());
