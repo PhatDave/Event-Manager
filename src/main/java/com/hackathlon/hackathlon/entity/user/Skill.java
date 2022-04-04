@@ -16,7 +16,6 @@ public class Skill {
     @Id
     @GeneratedValue(strategy=GenerationType.SEQUENCE, generator="skill_sequence")
     @SequenceGenerator(name="skill_sequence", allocationSize=10)
-    @Setter(AccessLevel.PRIVATE)
     private Long ID;
 
     @Column(name="name")

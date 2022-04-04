@@ -16,7 +16,6 @@ public class Mentor {
     @Id
     @GeneratedValue(strategy=GenerationType.SEQUENCE, generator="mentor_sequence")
     @SequenceGenerator(name="mentor_sequence", allocationSize=10)
-    @Setter(AccessLevel.PRIVATE)
     private Long ID;
 
     @Column(name="email")

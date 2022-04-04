@@ -16,7 +16,6 @@ public class Event {
     @Id
     @GeneratedValue(strategy=GenerationType.SEQUENCE, generator="event_sequence")
     @SequenceGenerator(name="event_sequence", allocationSize=10)
-    @Setter(AccessLevel.PRIVATE)
     private Long ID;
 
     @Column(name="name", unique=true)

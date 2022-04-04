@@ -17,7 +17,6 @@ public class Week {
     @Id
     @GeneratedValue(strategy=GenerationType.SEQUENCE, generator="week_sequence")
     @SequenceGenerator(name="week_sequence", allocationSize=10)
-    @Setter(AccessLevel.PRIVATE)
     private Long ID;
 
     @Column(name="status")

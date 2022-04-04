@@ -20,7 +20,6 @@ public class Registration {
     @Id
     @GeneratedValue(strategy=GenerationType.SEQUENCE, generator="registration_sequence")
     @SequenceGenerator(name="registration_sequence", allocationSize=10)
-    @Setter(AccessLevel.PRIVATE)
     private Long ID;
 
     @Column(name="score")

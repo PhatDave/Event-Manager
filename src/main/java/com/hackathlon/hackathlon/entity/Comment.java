@@ -18,7 +18,6 @@ public class Comment {
     @Id
     @GeneratedValue(strategy=GenerationType.SEQUENCE, generator="comment_sequence")
     @SequenceGenerator(name="comment_sequence", allocationSize=10)
-    @Setter(AccessLevel.PRIVATE)
     private Long ID;
 
     @Column(name="content")

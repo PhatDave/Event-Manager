@@ -19,7 +19,6 @@ public class User {
     @Id
     @GeneratedValue(strategy=GenerationType.SEQUENCE, generator="user_sequence")
     @SequenceGenerator(name="user_sequence", allocationSize=10)
-    @Setter(AccessLevel.PRIVATE)
     private Long ID;
 
     @Embedded
