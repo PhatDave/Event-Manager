@@ -55,8 +55,10 @@ public class GithubGradingServiceImpl implements GithubGradingService {
         for (GithubRepoDto repo : repos) {
             String language = repo.getLanguage();
             try {
-                GithubLanguageGradingEnum languageEnum = GithubLanguageGradingEnum.valueOf(language.toUpperCase());
-                score += languageEnum.getScore();
+                if (language != null) {
+                    GithubLanguageGradingEnum languageEnum = GithubLanguageGradingEnum.valueOf(language.toUpperCase());
+                    score += languageEnum.getScore();
+                }
             } catch (IllegalArgumentException e) {
                 continue;
             }
