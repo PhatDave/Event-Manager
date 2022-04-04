@@ -1,14 +1,12 @@
 package com.hackathlon.hackathlon.dto.requests.registrationDtos;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
 public class RegistrationRequestDto {
     private PersonalRequestDto personal;
     private ExperienceRequestDto experience;

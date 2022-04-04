@@ -1,15 +1,13 @@
 package com.hackathlon.hackathlon.dto.requests.registrationDtos;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
 public class InvitationRequestDto {
     private Boolean participation;
     private Boolean kickoff;
