@@ -7,7 +7,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
+import java.util.NoSuchElementException;
 
 @Service
 @RequiredArgsConstructor
@@ -16,11 +16,16 @@ public class TeamServiceImpl implements TeamService {
 
     @Override
     public List<Team> getAll() {
-        return this.teamRepository.findAll();
+        return teamRepository.findAll();
     }
 
     @Override
-    public Optional<Team> getById(Long id) {
-        return this.teamRepository.findById(id);
+    public Team getById(Long id) {
+        return teamRepository.findById(id).orElseThrow(() -> new NoSuchElementException("Team with id " + id + " not found"));
+    }
+
+    @Override
+    public List<Team> getByEventId(Long id) {
+        return teamRepository.findAllByEventID(id);
     }
 }
