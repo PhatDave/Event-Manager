@@ -20,16 +20,7 @@ import java.util.stream.Collectors;
 public interface TeamMapper {
     Team toEntity(TeamRequestDto dto);
 
-//    @Mapping(source = "users", target = "members")
     TeamResponseDto toDto(Team team);
-//    Can't map property "List<User> users" to "List<String> members". Consider to declare/implement a mapping method: "List<String> map(List<User> value)".
-
-//    {
-//        TeamResponseDto dto = new TeamResponseDto();
-//        dto.setName(team.getName());
-//        dto.setMembers(team.getUsers().stream().map(user -> user.getBasicInfo().getEmail()).collect(Collectors.toList()));
-//        return dto;
-//    }
 
     @AfterMapping
     default void mapUsersToMembers(Team team, @MappingTarget TeamResponseDto dto) {

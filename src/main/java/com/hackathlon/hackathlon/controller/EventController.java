@@ -42,6 +42,12 @@ public class EventController {
         return ResponseEntity.ok(dto);
     }
 
+    @GetMapping("/{eventId}/teams")
+    private ResponseEntity<TeamsResponseDto> getTeams(@PathVariable Long eventId) {
+        TeamsResponseDto dto = eventService.getTeams(eventId);
+        return ResponseEntity.ok(dto);
+    }
+
     @PutMapping("/{eventId}/participants/{userId}/week/{weekNo}")
     private ResponseEntity<?> addWeekProgress(@PathVariable Long eventId,
                                               @PathVariable Long userId,

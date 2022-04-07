@@ -14,6 +14,7 @@ public interface EventService {
     Event getById(Long id);
     Event create(EventRequestDto dto);
     ParticipantsResponseDto inviteParticipants(Long id);
+    TeamsResponseDto getTeams(Long id);
     TeamsResponseDto teamUp(Long eventId);
     List<DetailedParticipantDto> getDetailedParticipants(Long eventId, Pageable pageable);
     void updateEvents();

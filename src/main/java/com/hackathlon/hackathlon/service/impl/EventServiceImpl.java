@@ -22,6 +22,7 @@ import com.hackathlon.hackathlon.repository.RegistrationRepository;
 import com.hackathlon.hackathlon.repository.TeamRepository;
 import com.hackathlon.hackathlon.service.EmailSender;
 import com.hackathlon.hackathlon.service.EventService;
+import com.hackathlon.hackathlon.service.TeamService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.data.domain.Page;
@@ -38,6 +39,8 @@ public class EventServiceImpl implements EventService {
     private final RegistrationRepository registrationRepository;
     private final TeamRepository teamRepository;
     private final EmailSender emailSender;
+
+    private final TeamService teamService;
 
     private final EventMapper eventMapper;
     private final ParticipantMapper participantMapper;
@@ -77,6 +80,13 @@ public class EventServiceImpl implements EventService {
         List<ParticipantResponseDto> participants = registrations.stream().map(participantMapper::toDto).collect(Collectors.toList());
         ParticipantsResponseDto participantsDto = new ParticipantsResponseDto(participants);
         return participantsDto;
+    }
+
+    @Override
+    public TeamsResponseDto getTeams(Long id) {
+        Event event = getById(id);
+        List<Team> teams = teamService.getByEventId(id);
+        return new TeamsResponseDto(teams.stream().map(teamMapper::toDto).collect(Collectors.toList()));
     }
 
     @Override
