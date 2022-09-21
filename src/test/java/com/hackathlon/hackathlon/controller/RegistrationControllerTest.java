@@ -2,12 +2,12 @@ package com.hackathlon.hackathlon.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ObjectWriter;
-import com.hackathlon.hackathlon.dto.requests.registrationDtos.RegistrationRequestDto;
-import com.hackathlon.hackathlon.entity.Event;
-import com.hackathlon.hackathlon.entity.Registration;
-import com.hackathlon.hackathlon.entity.Team;
-import com.hackathlon.hackathlon.repository.EventRepository;
-import com.hackathlon.hackathlon.repository.RegistrationRepository;
+import com.hackathlon.dto.requests.registrationDtos.RegistrationRequestDto;
+import com.hackathlon.entity.Event;
+import com.hackathlon.entity.Registration;
+import com.hackathlon.entity.Team;
+import com.hackathlon.repository.EventRepository;
+import com.hackathlon.repository.RegistrationRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;

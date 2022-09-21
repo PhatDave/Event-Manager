@@ -1,9 +1,9 @@
 package testUtils;
 
-import com.hackathlon.hackathlon.dto.requests.eventDtos.EventRequestDto;
-import com.hackathlon.hackathlon.dto.requests.registrationDtos.*;
-import com.hackathlon.hackathlon.entity.Team;
-import com.hackathlon.hackathlon.entity.user.Skill;
+import com.hackathlon.dto.requests.eventDtos.EventRequestDto;
+import com.hackathlon.dto.requests.registrationDtos.*;
+import com.hackathlon.entity.Team;
+import com.hackathlon.entity.user.Skill;
 
 import java.util.ArrayList;
 import java.util.Date;
